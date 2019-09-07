@@ -6,10 +6,6 @@ class CategoryData {
 
 	public function CategoryData(){
 		$this->name = "";
-		$this->lastname = "";
-		$this->email = "";
-		$this->image = "";
-		$this->password = "";
 		$this->created_at = "NOW()";
 	}
 

@@ -20,7 +20,7 @@
 			// si hay usuarios
 			?>
 
-			<table class="table table-bordered table-hover">
+			<table class="table table-bordered table-hover table-sm datatable"  width="100%"  >
 			<thead>
 			<th>Nombre completo</th>
 			<th>Direccion</th>
@@ -44,16 +44,10 @@
 				<?php
 
 			}
-
-
-
 		}else{
 			echo "<p class='alert alert-danger'>No hay clientes</p>";
 		}
-
-
 		?>
-
-
+		</table>
 	</div>
 </div>

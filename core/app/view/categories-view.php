@@ -12,7 +12,7 @@
 			// si hay usuarios
 			?>
 
-			<table class="table table-bordered table-hover">
+			<table class="table table-bordered table-hover datatable">
 			<thead>
 			<th>Nombre</th>
 			<th></th>
@@ -21,22 +21,16 @@
 			foreach($users as $user){
 				?>
 				<tr>
-				<td><?php echo $user->name." ".$user->lastname; ?></td>
+				<td><?php echo $user->name; ?></td>
 				<td style="width:130px;"><a href="index.php?view=editcategory&id=<?php echo $user->id;?>" class="btn btn-warning btn-xs">Editar</a> <a href="index.php?view=delcategory&id=<?php echo $user->id;?>" class="btn btn-danger btn-xs">Eliminar</a></td>
 				</tr>
 				<?php
-
 			}
-
-
-
 		}else{
 			echo "<p class='alert alert-danger'>No hay Categorias</p>";
 		}
-
-
 		?>
-
+			</table>
 
 	</div>
 </div>

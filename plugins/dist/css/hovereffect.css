@@ -57,3 +57,10 @@ img.logo-navbar {
     width: 10rem !important;
     height: 10rem !important;
 }
+
+ul.nav li.dropdown:hover ul.dropdown-menu { display: block; }
+
+.dropdown-menu{
+  background: #3c8dbc !important;
+  right: 0px !important;
+  }
