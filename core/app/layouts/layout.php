@@ -47,7 +47,8 @@
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b>R</b>P</span>
           <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg"><b>REPUESTOS</b> PINO</span>
+          <!-- <span class="logo-lg"><b>REPUESTOS</b> PINO C.A</span> -->
+        <img src="plugins/dist/img/logo_163px.png"  >
         </a>
 
         <!-- Header Navbar: style can be found in header.less -->
@@ -66,7 +67,7 @@
                   <span class="label label-success">4</span>
                 </a>
                 <ul class="dropdown-menu">
-                  <li class="header">You have 4 messages</li>
+                  <li class="header">Tiene 4 mensajes</li>
                   <li>
                     <!-- inner menu: contains the actual data -->
                     <ul class="menu">
@@ -76,16 +77,16 @@
                             <img src="plugins/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                           </div>
                           <h4>
-                            Sender Name
+                            Enviado por:
                             <small><i class="fa fa-clock-o"></i> 5 mins</small>
                           </h4>
-                          <p>Message Excerpt</p>
+                          <p>Jose Reverón</p>
                         </a>
                       </li><!-- end message -->
                       ...
                     </ul>
                   </li>
-                  <li class="footer"><a href="#">See All Messages</a></li>
+                  <li class="footer"><a href="#">Ver todos los mensajes</a></li>
                 </ul>
               </li>
               <!-- Notifications: style can be found in dropdown.less -->
@@ -95,19 +96,19 @@
                   <span class="label label-warning">10</span>
                 </a>
                 <ul class="dropdown-menu">
-                  <li class="header">You have 10 notifications</li>
+                  <li class="header">Tiene 10 Alertas</li>
                   <li>
                     <!-- inner menu: contains the actual data -->
                     <ul class="menu">
                       <li>
                         <a href="#">
-                          <i class="ion ion-ios-people info"></i> Notification title
+                          <i class="ion ion-ios-people info"></i> Productos sin Stock
                         </a>
                       </li>
                       ...
                     </ul>
                   </li>
-                  <li class="footer"><a href="#">View all</a></li>
+                  <li class="footer"><a href="#">Ver Todas</a></li>
                 </ul>
               </li>
               <!-- Tasks: style can be found in dropdown.less -->
@@ -117,14 +118,14 @@
                   <span class="label label-danger">9</span>
                 </a>
                 <ul class="dropdown-menu">
-                  <li class="header">You have 9 tasks</li>
+                  <li class="header">Tiene 9 tareas</li>
                   <li>
                     <!-- inner menu: contains the actual data -->
                     <ul class="menu">
                       <li><!-- Task item -->
                         <a href="#">
                           <h3>
-                            Design some buttons
+                           Reabastecer Inventario
                             <small class="pull-right">20%</small>
                           </h3>
                           <div class="progress xs">
@@ -138,7 +139,7 @@
                     </ul>
                   </li>
                   <li class="footer">
-                    <a href="#">View all tasks</a>
+                    <a href="#">Ver todas las tareas</a>
                   </li>
                 </ul>
               </li>
@@ -146,25 +147,30 @@
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <img src="plugins/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                  <span class="hidden-xs">Alexander Pierce</span>
+                  <span class="hidden-xs">
+                    <?php if(isset($_SESSION["user_id"]) )
+                        { echo UserData::getById($_SESSION["user_id"])->username ." ". UserData::getById($_SESSION["user_id"])->lastname; }  ?>
+                  </span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
                     <img src="plugins/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                     <p>
-                      Alexander Pierce - Web Developer
-                      <small>Member since Nov. 2012</small>
+                     <?php if(isset($_SESSION["user_id"]) )
+                        { echo UserData::getById($_SESSION["user_id"])->username ." ". UserData::getById($_SESSION["user_id"])->lastname; }  ?>
+                      <small><?php if(isset($_SESSION["user_id"]) )
+                        { echo UserData::getById($_SESSION["user_id"])->name ; }  ?></small>
                     </p>
                   </li>
                  
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     <div class="pull-left">
-                      <a href="#" class="btn btn-default btn-flat">Profile</a>
+                      <a href="#" class="btn btn-default btn-flat">Perfil</a>
                     </div>
                     <div class="pull-right">
-                      <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                      <a href="./logout.php" class="btn btn-default btn-flat">Salir</a>
                     </div>
                   </li>
                 </ul>
@@ -251,31 +257,39 @@
 <strong>Copyright &copy; 2019 <a href="http://evilnapsis.com/company/" target="_blank">Evilnapsis</a></strong>
 </footer> -->
 <?php else:?>
-  <div class="login-box">
-    <div class="login-logo">
-      <a href="./">INVENTIO<b>LITE</b></a>
-    </div><!-- /.login-logo -->
-    <div class="login-box-body">
-      <form action="./?action=processlogin" method="post">
-        <div class="form-group has-feedback">
-          <input type="text" name="username" required class="form-control" placeholder="Usuario"/>
-          <span class="glyphicon glyphicon-user form-control-feedback"></span>
+<div class="login-box">
+  <div class="login-logo">
+    <!-- <a href="login-logo"><b>REPUESTOS</b>PINO C.A</a> -->
+    <img src="plugins/dist/img/logo.png"  >
+  </div>
+  <!-- /.login-logo -->
+  <div class="login-box-body">
+    <form action="./?action=processlogin" method="post">
+      <div class="form-group has-feedback">
+        <input type="text" name="username" class="form-control" placeholder="Usuario">
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input type="password"   name="password"class="form-control" placeholder="Password">
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="row">
+        <div class="col-xs-8">
+           <a href="#">Olvide mi password</a>
         </div>
-        <div class="form-group has-feedback">
-          <input type="password" name="password" required class="form-control" placeholder="Password"/>
-          <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        <!-- /.col -->
+        <div class="col-xs-4">
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Acceder</button>
         </div>
-        <div class="row">
+        <!-- /.col -->
+      </div>
+    </form>
 
-          <div class="col-xs-12">
-            <button type="submit" class="btn btn-primary btn-block btn-flat">Acceder</button>
-          </div><!-- /.col -->
-        </div>
-      </form>
-    </div><!-- /.login-box-body -->
-  </div><!-- /.login-box -->  
+  </div>
+  <!-- /.login-box-body -->
+</div>
+<!-- /.login-box -->
 <?php endif;?>
-
 
 </div><!-- ./wrapper -->
 
@@ -285,11 +299,6 @@
 <script src="plugins/Datatables/dataTables.min.js"></script>
 <link rel="stylesheet" href="plugins/Datatables/dataTables.css">
 <script src="plugins/dist/js/functions.js"></script>
-
-<!-- Optionally, you can add Slimscroll and FastClick plugins.
-Both of these plugins are recommended to enhance the
-user experience. Slimscroll is required when using the
-fixed layout. -->
 </body>
 </html>
 

@@ -1,14 +1,15 @@
 <div class="row">
-	<div class="col-md-12">
-	<h1>Reabastecer Inventario</h1>
-	<p><b>Buscar producto por nombre o por codigo:</b></p>
+	<div class="col-md-12 col-sm-6 col-ms-6 col-xs-12">
+	<h2>Reabastecer Inventario</h2>
+	<p><b>Buscar producto por nombre o codigo:</b></p>
 		<form>
 		<div class="row">
-			<div class="col-md-6">
+			<div class="col-sm-6">
 				<input type="hidden" name="view" value="re">
 				<input type="text" name="product" class="form-control">
 			</div>
-			<div class="col-md-3">
+			<div class="col-sm-3">
+			<br>
 			<button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Buscar</button>
 			</div>
 		</div>

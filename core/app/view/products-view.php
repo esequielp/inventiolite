@@ -5,17 +5,17 @@ $ultimo_elemento=count($divisas)-1;
 $valor_dolar = ($divisas[$ultimo_elemento]->monto);
 ?>
 <div class="row">
-<div class="col-md-12">
-<h1 >Lista de Productos</h1>
-	<h4>Precio del Dolar : <?php echo number_format($valor_dolar,2,'.',','); ?></h4>
+<div class="col-md-12 col-sm-6 col-ms-6 col-xs-12">
+<h2 >Lista de Productos</h2>
+	<h5>Precio del Dolar : <?php echo number_format($valor_dolar,2,'.',','); ?></h5>
 </div>
 </div>
 <div class="row">
-	<div class="col-md-12">
+	<div class="col-md-12 col-sm-6 col-ms-6 col-xs-12">
 		<div class="btn-group  pull-right">
-			<a href="index.php?view=newproduct" class="btn btn-info">Agregar Producto</a>
+			<a href="index.php?view=newproduct" class="btn btn-default btn-sm">Agregar Producto</a>
 			<div class="btn-group pull-right">
-				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+				<button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
 					<i class="fa fa-download"></i> Descargar <span class="caret"></span>
 				</button>
 				<ul class="dropdown-menu" role="menu">
@@ -26,40 +26,39 @@ $valor_dolar = ($divisas[$ultimo_elemento]->monto);
 	</div>
 </div>
 <div class="clearfix"></div>	
-
-<?php
-
-$products = ProductData::getAll();
-
-if(count($products)>0){
-
-?>
 <br>
+<?php
+$products = ProductData::getAll();
+if(count($products)>0){
+?>
 <div class="row">
-<div class="col-md-12">
-
-
-
-
+<div class="col-md-12 col-sm-6 col-ms-6 col-xs-12">
 <table class="table table-bordered table-hover table-sm datatable"  width="100%"  >
 	<thead>
 		<tr>
 		<!-- <th>Cod. Bar</th> -->
 		<th>Imagen</th>
 		<th>Nombre</th>
-		<th>Precio Costo</th>
+		<th>Costo</th>
+		<th>Costo($)</th>
 		<th>Precio($)</th>
 		<th>Precio(Bs)</th>
-		<!-- <th>Ganancia</th> -->
+		<th>Ganancia</th>
 		<th>Categoria</th>
 		<!-- <th>Minima</th> -->
-		<th>Activo</th>
+		<th>Status</th>
 		<th>Acciones</th>
 		
 		</tr>
 	</thead>
 	<tbody>
-	<?php foreach($products as $product):?>
+	<?php foreach($products as $product):
+		$PrecioNeto = $product->price_in * $valor_dolar  ;
+		$PrecioGanciaDL = (($product->price_in * $product->percentage) /100 )  + $product->price_in ;
+		$PrecioGanciaBs = ((($product->price_in *$product->percentage) /100 ) * $valor_dolar ) ;
+		$PrecioVentaBS = $PrecioNeto + $PrecioGanciaBs;
+		
+	?>
 	<tr id="<?php echo $product->id; ?>">
 		<!-- <td><?php echo $product->barcode; ?></td> -->
 		<td>
@@ -79,28 +78,22 @@ if(count($products)>0){
 			</div>
     	</td>
 		<td><?php echo $product->name; ?></td>
-		<?php
-				$PrecioNeto = $product->price_in * $valor_dolar  ;
-				$PrecioGanciaDL = (($product->price_in * $product->percentage) /100 )  + $product->price_in ;
-				$PrecioGanciaBs = ((($product->price_in *$product->percentage) /100 ) * $valor_dolar ) ;
-				$PrecioVentaBS = $PrecioNeto + $PrecioGanciaBs;
-		?>
-				<td>$ <?php echo number_format($product->price_in,2,'.',','); ?></td>
-				<td>Bs <?php echo number_format($PrecioGanciaDL,2,'.',','); ?></td>
-				<td>Bs <?php echo number_format($PrecioVentaBS,2,'.',','); ?></td>
-				<!-- <td>Bs <?php echo number_format($PrecioGanciaBs,2,'.',',');	?></td> -->
-				<td><?php if($product->category_id!=null){echo $product->getCategory()->name;}else{ echo "<center>----</center>"; }  ?></td>
-				<!-- <td><?php echo $product->inventary_min; ?></td> -->
-				<td><?php if($product->is_active): ?><i class="fa fa-check"></i><?php endif;?></td>
-				
 
-				<td style="width:70px;">
-				<a title="Editar" href="index.php?view=editproduct&id=<?php echo $product->id; ?>" class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-pencil"></i></a>
-				<a title="Eliminar" href="index.php?view=delproduct&id=<?php echo $product->id; ?>" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>
-				<a title="Duplicar" class="btn btn-xs btn-info clone" id="<?php echo $product->id; ?>"><i class="glyphicon glyphicon-file"></i></a>
-				</td>
+		<td>$ <?php echo number_format($product->price_in,2,'.',','); ?></td>
+		<td>$ <?php echo number_format($product->price_in,2,'.',','); ?></td>
+		<td>Bs <?php echo number_format($PrecioGanciaDL,2,'.',','); ?></td>
+		<td>Bs <?php echo number_format($PrecioVentaBS,2,'.',','); ?></td>
+		<td>Bs <?php echo number_format($PrecioGanciaBs,2,'.',',');	?></td> 
+		<td><?php if($product->category_id!=null){echo $product->getCategory()->name;}else{ echo "<center>----</center>"; }  ?></td>
+		<!-- <td><?php echo $product->inventary_min; ?></td> -->
+		<td ><?php if($product->is_active): ?><i class="fa fa-check"></i><?php endif;?></td>
+		<td style="width:80px;">
+		<a title="Editar" href="index.php?view=editproduct&id=<?php echo $product->id; ?>" class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-pencil"></i></a>
+		<a title="Eliminar" href="index.php?view=delproduct&id=<?php echo $product->id; ?>" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>
+		<a title="Duplicar" class="btn btn-xs btn-info clone" id="<?php echo $product->id; ?>"><i class="glyphicon glyphicon-file"></i></a>
+		</td>
 				
-			</tr>
+	</tr>
 			<?php endforeach;?>
 		</tbody>
 		</table>

@@ -4,31 +4,15 @@
 		<h1>Lista de Usuarios</h1>
 <br>
 		<?php
-		/*
-		$u = new UserData();
-		print_r($u);
-		$u->name = "Agustin";
-		$u->lastname = "Ramos";
-		$u->email = "evilnapsis@gmail.com";
-		$u->password = sha1(md5("l00lapal00za"));
-		$u->add();
-
-
-		$f = $u->createForm();
-		print_r($f);
-		echo $f->label("name")." ".$f->render("name");
-		*/
-		?>
-		<?php
 
 		$users = UserData::getAll();
 		if(count($users)>0){
 			// si hay usuarios
 			?>
-			<table class="table table-bordered table-hover">
+			<table class="table table-bordered table-hover table-sm datatable"  width="100%"  >
 			<thead>
 			<th>Nombre completo</th>
-			<th>Nombre de usuario</th>
+			<th>Perfil</th>
 			<th>Email</th>
 			<th>Activo</th>
 			<th>Admin</th>
@@ -38,8 +22,8 @@
 			foreach($users as $user){
 				?>
 				<tr>
-				<td><?php echo $user->name." ".$user->lastname; ?></td>
-				<td><?php echo $user->username; ?></td>
+				<td><?php echo $user->username." ".$user->lastname; ?></td>
+				<td><?php echo $user->name; ?></td>
 				<td><?php echo $user->email; ?></td>
 				<td>
 					<?php if($user->is_active):?>

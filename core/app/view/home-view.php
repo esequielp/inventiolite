@@ -11,8 +11,8 @@ foreach($products as $product){
 }
 	?>
 <div class="row">
-	<div class="col-md-12">
-		<h1>Bienvenido Sistema de Ventas</h1>
+	<div class="col-md-12 col-sm-6 col-ms-6 col-xs-12">
+		<h2>Bienvenido Sistema de Ventas</h2>
 </div>
 </div>
   <div class="row">
@@ -83,7 +83,7 @@ foreach($products as $product){
 	<div class="col-md-12">
 <?php if($found):?>
 <div class="btn-group pull-right">
-  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+  <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
     <i class="fa fa-download"></i> Descargar <span class="caret"></span>
   </button>
   <ul class="dropdown-menu" role="menu">
@@ -94,12 +94,20 @@ foreach($products as $product){
 
 </div>
 <div class="clearfix"></div>
+
+    <h3 class="col-md-12">Productos Alerta Stock</h3>
+
+
 <?php if(count($products)>0){?>
-<br><table class="table table-bordered table-hover">
+
+
+<div class="col-md-12 col-sm-6 col-ms-6 col-xs-12">
+<table class="table table-bordered table-hover table-sm datatable2"  width="100%"  >
 	<thead>
-		<th >Codigo</th>
-		<th>Nombre del producto</th>
-		<th>En Stock</th>
+		<th >Cod.</th>
+		<th>Producto</th>
+		<th>Cant</th>
+    <th>Stock</th>
 		<th></th>
 	</thead>
 	<?php
@@ -111,7 +119,8 @@ foreach($products as $product):
 		<td><?php echo $product->id; ?></td>
 		<td><?php echo $product->name; ?></td>
 		<td><?php echo $q; ?></td>
-		<td>
+    <td><?php echo $q; ?></td>
+		<td style="width: 80px;">
 		<?php if($q==0){ echo "<span class='label label-danger'>No hay existencias.</span>";}else if($q<=$product->inventary_min/2){ echo "<span class='label label-danger'>Quedan muy pocas existencias.</span>";} else if($q<=$product->inventary_min){ echo "<span class='label label-warning'>Quedan pocas existencias.</span>";} ?>
 		</td>
 	</tr>
@@ -120,6 +129,7 @@ foreach($products as $product):
 endforeach;
 ?>
 </table>
+</div>
 
 <div class="clearfix"></div>
 
