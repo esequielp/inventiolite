@@ -40,12 +40,7 @@
   padding: 8px 16px;
 }
 
-table th:nth-child(3),
-td:nth-child(3) {
-  display: none;
-}
-
- .logo-image{
+.logo-image{
     width: 46px;
     height: 46px;
     border-radius: 50%;

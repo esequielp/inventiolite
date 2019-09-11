@@ -7,15 +7,7 @@
 <div class="row">
 	<div class="col-md-12 col-sm-6 col-ms-6 col-xs-12">
 		<div class="btn-group  pull-right">
-			<a href="index.php?view=newclient" class="btn btn-default btn-sm">Nuevo Cliente</a>
-			<div class="btn-group pull-right">
-				<button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
-					<i class="fa fa-download"></i> Descargar <span class="caret"></span>
-				</button>
-				<ul class="dropdown-menu" role="menu">
-					<li><a href="report/clients-word.php">Word 2007 (.docx)</a></li>
-				</ul>
-			</div>
+			<a href="index.php?view=newclient" class="btn btn-info"><i class='fa fa-plus'></i> Nuevo Cliente</a>
 		</div>
 	</div>
 </div>
@@ -35,7 +27,7 @@ if(count($users)>0){
 			<th>Direccion</th>
 			<th>Email</th>
 			<th>Telefono</th>
-			<th></th>
+			<th>Accion</th>
 			</thead>
 			<?php
 			foreach($users as $user){

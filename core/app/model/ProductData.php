@@ -17,33 +17,34 @@ class ProductData {
 	public function getCategory(){ return CategoryData::getById($this->category_id);}
 
 	public function add(){
-		$sql = "insert into ".self::$tablename." (barcode,name,description,price_in,percentage,user_id,presentation,unit,category_id,inventary_min,is_bsf,created_at) ";
-		$sql .= "value (\"$this->barcode\",\"$this->name\",\"$this->description\",\"$this->price_in\",\"$this->percentage\",$this->user_id,\"$this->presentation\",\"$this->unit\",$this->category_id,$this->inventary_min,\"$this->is_bsf\",NOW())";
-		
-		ECHO "AQUII";
-		echo $sql;
-		exit;
+		$pg = $this->percentage;
+		$divisas = DivisaData::getAll();
+		//ultimo valor del dolar  
+		$ultimo_elemento=count($divisas)-1; 
+		$valor_dolar = ($divisas[$ultimo_elemento]->monto);
+		$finalPrice = ((($this->price_in * $pg) /100 ) + $this->price_in ) * $valor_dolar ;	
 
+		$sql = "insert into ".self::$tablename." (barcode,name,description,price_in,price_out,percentage,user_id,presentation,unit,category_id,inventary_min,is_bsf,created_at) ";
+		$sql .= "value (\"$this->barcode\",\"$this->name\",\"$this->description\",\"$this->price_in\",\"$finalPrice\",\"$this->percentage\",$this->user_id,\"$this->presentation\",\"$this->unit\",$this->category_id,$this->inventary_min,\"$this->is_bsf\",NOW())";
+		
 		return Executor::doit($sql);
-	//actualizo precio
-	$priceOut = ProductData::updatePriceOut($this->price_in);
 
 	}
 	public function add_with_image(){
 
-	$pg = $this->percentage;
-	$divisas = DivisaData::getAll();
-	//ultimo valor del dolar  
-	$ultimo_elemento=count($divisas)-1; 
-	$valor_dolar = ($divisas[$ultimo_elemento]->monto);
-	$finalPrice = ((($this->price_in * $pg) /100 ) + $this->price_in ) * $valor_dolar ;
+		$pg = $this->percentage;
+		$divisas = DivisaData::getAll();
+		//ultimo valor del dolar  
+		$ultimo_elemento=count($divisas)-1; 
+		$valor_dolar = ($divisas[$ultimo_elemento]->monto);
+		$finalPrice = ((($this->price_in * $pg) /100 ) + $this->price_in ) * $valor_dolar ;
 
 
 		$sql = "insert into ".self::$tablename." (barcode,image,name,description,price_in,price_out,percentage,user_id,presentation,unit,category_id,inventary_min,is_bsf,created_at) ";
 		$sql .= "value (\"$this->barcode\",\"$this->image\",\"$this->name\",\"$this->description\",\"$this->price_in\",\"$finalPrice\",\"$this->percentage\",$this->user_id,\"$this->presentation\",\"$this->unit\",$this->category_id,$this->inventary_min,\"$this->is_bsf\",NOW())";
 
-		//echo $sql;
-		//exit;
+			//echo $sql;
+			//exit;
 		return Executor::doit($sql);
 
 	}
@@ -69,33 +70,31 @@ class ProductData {
 
 // partiendo de que ya tenemos creado un objecto ProductData previamente utilizamos el contexto
 	public function update(){
-	//	porcentaje de ganancia 
-	$configurations = ConfigurationData::getById(9);
-	$pg =  $configurations ->val;
-	$divisas = DivisaData::getAll();
-	//ultimo valor del dolar  
-	$ultimo_elemento=count($divisas)-1; 
-	$valor_dolar = ($divisas[$ultimo_elemento]->monto);	
-	$finalPrice = ((($this->price_in * $pg) /100 ) + $this->price_in ) * $valor_dolar ;
-	
-		$sql = "update ".self::$tablename." set barcode=\"$this->barcode\",name=\"$this->name\",price_in=\"$this->price_in\",price_out=\"$finalPrice\",unit=\"$this->unit\",presentation=\"$this->presentation\",category_id=$this->category_id,inventary_min=\"$this->inventary_min\",description=\"$this->description\",is_active=\"$this->is_active\" where id=$this->id";
-	Executor::doit($sql);
-    //actualizo precio
-	$priceOut = ProductData::updatePriceOut($this->price_in);		
+		//	porcentaje de ganancia 
+		$pg = $this->percentage;
+		$divisas = DivisaData::getAll();
+		//ultimo valor del dolar  
+		$ultimo_elemento=count($divisas)-1; 
+		$valor_dolar = ($divisas[$ultimo_elemento]->monto);
+		$finalPrice = ((($this->price_in * $pg) /100 ) + $this->price_in ) * $valor_dolar ;
+		
+			$sql = "update ".self::$tablename." set barcode=\"$this->barcode\",name=\"$this->name\",price_in=\"$this->price_in\",price_out=\"$finalPrice\",unit=\"$this->unit\",presentation=\"$this->presentation\",category_id=$this->category_id,inventary_min=\"$this->inventary_min\",description=\"$this->description\",is_active=\"$this->is_active\",is_bsf=\"$this->is_bsf\" where id=$this->id";
+		Executor::doit($sql);
+	    //actualizo precio
 	}
 
 	public function updatePriceOut($price){
-	//	porcentaje de ganancia 
-	$configurations = ConfigurationData::getById(9);
-	$pg =  $configurations ->val;
-	$divisas = DivisaData::getAll();
-	//ultimo valor del dolar  
-	$ultimo_elemento=count($divisas)-1; 
-	$valor_dolar = ($divisas[$ultimo_elemento]->monto);
+		//	porcentaje de ganancia 
+		$configurations = ConfigurationData::getById(9);
+		$pg =  $configurations ->val;
+		$divisas = DivisaData::getAll();
+		//ultimo valor del dolar  
+		$ultimo_elemento=count($divisas)-1; 
+		$valor_dolar = ($divisas[$ultimo_elemento]->monto);
 
 
-	//busco los precios de los productos
-	$products = ProductData::getAllActive();	
+		//busco los precios de los productos
+		$products = ProductData::getAllActive();	
 		
 		foreach($products as $product):
 		$finalPrice = ((($product->price_in * $pg) /100 ) + $product->price_in ) * $valor_dolar ;
@@ -172,10 +171,68 @@ class ProductData {
 	}
 
 
+	//test data INSERT
+
+	public function addTestData($cant){
+	$pg = 30;
+	$divisas = DivisaData::getAll();
+	//ultimo valor del dolar  
+	$ultimo_elemento=count($divisas)-1; 
+
+	$x =0;
+	$idcategoria = 1;
+	
+	$sql = "insert into ".self::$tablename." (name,description,price_in,price_out,percentage,user_id,unit,category_id,inventary_min,created_at) value ";
+
+	$sql2 ="";
+	while ( $x <= $cant) {
+		# code...
+		$nombreProduct  = "PRODUCTO - " . $x ;
+		$descripcionProduct  = "DESCRIPCION - " . $x ;
+		$valor_dolar = ($divisas[$ultimo_elemento]->monto);
+		$precioIn = rand(10,100);
+		$finalPrice = ((($precioIn * $pg) /100 ) + $precioIn ) * $valor_dolar ;	
 
 
+		$sql2 .= "(\"$nombreProduct\",\"$descripcionProduct\",$precioIn,$finalPrice,30,1,1,$idcategoria,1,NOW()),";
 
+		//echo $sql ."<br><br>";
+	$x++;
+		if ($idcategoria == 1 ) {
+			$idcategoria = 2;
+			# code...
+		}else{
+			$idcategoria = 1;
+		}
 
+	}
+	$sqlall = $sql . $sql2 ;
+	$sql_final = substr($sqlall, 0, -1);
+	//echo $sql_final;
+	Executor::doit($sql_final);		
+
+	}
+
+	// INSERT IMAGES
+	public function addImageData($idpdt){
+	$products = ProductData::getAll();
+
+	$sql = "insert into images (image_name,id_product) values ";
+	$sql2= "";
+	foreach($products as $product):
+	
+	    if ($product->id > $idpdt){
+		$idprod = $product->id;
+			$sql2 .= "('Reloj-Inteligente-Smart-Watch-V8-Dorado-Dz09-1.jpg',$idprod),"	;
+		
+		}
+	endforeach;
+
+	$sqlall = $sql . $sql2 ;
+	$sql_final = substr($sqlall, 0, -1);
+	//echo $sql_final;
+	Executor::doit($sql_final);	
+	}
 
 }
 

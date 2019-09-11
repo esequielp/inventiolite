@@ -28,7 +28,7 @@ $categories = CategoryData::getAll();
   <div class="form-group">
     <label for="inputEmail1" class="col-lg-2 control-label">Categoria</label>
     <div class="col-md-6">
-    <select name="category_id" class="form-control">
+    <select name="category_id" class="form-control select2">
     <option value="">-- NINGUNA --</option>
     <?php foreach($categories as $category):?>
       <option value="<?php echo $category->id;?>"><?php echo $category->name;?></option>

@@ -80,35 +80,25 @@ foreach($products as $product){
       <!-- /.row -->
 
 <div class="row">
-	<div class="col-md-12">
-<?php if($found):?>
-<div class="btn-group pull-right">
-  <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
-    <i class="fa fa-download"></i> Descargar <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu" role="menu">
-    <li><a href="report/alerts-word.php">Word 2007 (.docx)</a></li>
-  </ul>
-</div>
-<?php endif;?>
 
-</div>
 <div class="clearfix"></div>
 
     <h3 class="col-md-12">Productos Alerta Stock</h3>
 
+</div>
 
 <?php if(count($products)>0){?>
 
 
-<div class="col-md-12 col-sm-6 col-ms-6 col-xs-12">
-<table class="table table-bordered table-hover table-sm datatable2"  width="100%"  >
+<div class="Responsive">
+
+<table class="table table-bordered table-hover table-responsive-sm datatable"  width="100%"  >
 	<thead>
 		<th >Cod.</th>
 		<th>Producto</th>
 		<th>Cant</th>
+    <th>Categoria</th>
     <th>Stock</th>
-		<th></th>
 	</thead>
 	<?php
 foreach($products as $product):
@@ -116,12 +106,25 @@ foreach($products as $product):
 	?>
 	<?php if($q<=$product->inventary_min):?>
 	<tr class="<?php if($q==0){ echo "danger"; }else if($q<=$product->inventary_min/2){ echo "danger"; } else if($q<=$product->inventary_min){ echo "warning"; } ?>">
-		<td><?php echo $product->id; ?></td>
+		<td><?php echo $product->id;  ?></td>
 		<td><?php echo $product->name; ?></td>
-		<td><?php echo $q; ?></td>
     <td><?php echo $q; ?></td>
-		<td style="width: 80px;">
-		<?php if($q==0){ echo "<span class='label label-danger'>No hay existencias.</span>";}else if($q<=$product->inventary_min/2){ echo "<span class='label label-danger'>Quedan muy pocas existencias.</span>";} else if($q<=$product->inventary_min){ echo "<span class='label label-warning'>Quedan pocas existencias.</span>";} ?>
+    <td><?php 
+
+    $categories = CategoryData::getById($product->category_id);
+    echo  $category = $categories->name;
+    ?></td>
+		<td style="width:93px;">
+		<?php if($q==0){ echo "<span class='label label-danger'><i class='glyphicon glyphicon-minus-sign'></i> Sin Stock.</span>";
+       echo "<a href='index.php?view=input&product_id=$product->id' class='btn btn-xs btn-primary'><i class='glyphicon glyphicon-circle-arrow-up'></i> Alta</a>";
+
+  }else if($q<=$product->inventary_min/2){ echo "<span class='label label-danger'>Muy bajo Stock.</span>";
+       echo "<a href='index.php?view=input&product_id=$product->id' class='btn btn-xs btn-primary'><i class='glyphicon glyphicon-circle-arrow-up'></i> Alta</a>";
+
+} else if($q<=$product->inventary_min){ echo "<span class='label label-warning'>Poco stock.</span>";
+       echo "<a href='index.php?view=input&product_id=$product->id' class='btn btn-xs btn-primary'><i class='glyphicon glyphicon-circle-arrow-up'></i> Alta</a>";
+
+} ?>
 		</td>
 	</tr>
 <?php endif;?>
@@ -145,5 +148,5 @@ endforeach;
 
 ?>
 <br><br><br><br><br><br><br><br><br><br>
-	</div>
+	
 </div>
