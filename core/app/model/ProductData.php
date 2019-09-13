@@ -4,6 +4,8 @@ class ProductData {
 
 	public function ProductData(){
 		$this->name = "";
+		$this->description = "";
+		$this->attribute = "";
 		$this->price_in = "";
 		$this->price_out = "";
 		$this->percentage = "";
@@ -19,32 +21,27 @@ class ProductData {
 	public function add(){
 		$pg = $this->percentage;
 		$divisas = DivisaData::getAll();
-		//ultimo valor del dolar  
-		$ultimo_elemento=count($divisas)-1; 
-		$valor_dolar = ($divisas[$ultimo_elemento]->monto);
-		$finalPrice = ((($this->price_in * $pg) /100 ) + $this->price_in ) * $valor_dolar ;	
-
-		$sql = "insert into ".self::$tablename." (barcode,name,description,price_in,price_out,percentage,user_id,presentation,unit,category_id,inventary_min,is_bsf,created_at) ";
-		$sql .= "value (\"$this->barcode\",\"$this->name\",\"$this->description\",\"$this->price_in\",\"$finalPrice\",\"$this->percentage\",$this->user_id,\"$this->presentation\",\"$this->unit\",$this->category_id,$this->inventary_min,\"$this->is_bsf\",NOW())";
 		
-		return Executor::doit($sql);
-
-	}
-	public function add_with_image(){
-
-		$pg = $this->percentage;
-		$divisas = DivisaData::getAll();
 		//ultimo valor del dolar  
 		$ultimo_elemento=count($divisas)-1; 
 		$valor_dolar = ($divisas[$ultimo_elemento]->monto);
-		$finalPrice = ((($this->price_in * $pg) /100 ) + $this->price_in ) * $valor_dolar ;
+		
+		//Precio costo en Bsf
+		$PrecioNeto = $this->price_in * $valor_dolar  ;
+		//Cantidad de Ganancia en Dolar
+		$PrecioGanciaDL = (($this->price_in * $pg) /100 )  + $product->price_in ;
+		//Cantidad Ganancia en Bs
+		$PrecioGanciaBs = ((($this->price_in * $pg) /100 ) * $valor_dolar ) ;
+		//Precio venta en dolar
+		$PrecioVentaDl = ((($this->price_in * $pg) /100 ) + $this->price_in )  ;	
+		//Precio Venta en Bolivares
+		$PrecioVentaBS = $PrecioNeto + $PrecioGanciaBs;
 
-
-		$sql = "insert into ".self::$tablename." (barcode,image,name,description,price_in,price_out,percentage,user_id,presentation,unit,category_id,inventary_min,is_bsf,created_at) ";
-		$sql .= "value (\"$this->barcode\",\"$this->image\",\"$this->name\",\"$this->description\",\"$this->price_in\",\"$finalPrice\",\"$this->percentage\",$this->user_id,\"$this->presentation\",\"$this->unit\",$this->category_id,$this->inventary_min,\"$this->is_bsf\",NOW())";
-
-			//echo $sql;
-			//exit;
+		$sql = "insert into ".self::$tablename." (barcode,name,description,attribute,price_in,price_out,price_out_bs,gain_dl,gain_bs,percentage,user_id,presentation,unit,category_id,inventary_min,is_bsf,created_at) ";
+		$sql .= "value (\"$this->barcode\",\"$this->name\",\"$this->description\",\"$this->attribute\",\"$this->price_in\",\"$PrecioVentaDl\",\"$PrecioVentaBS\",\"$PrecioGanciaDL\",\"$PrecioGanciaBs\",\"$this->percentage\",$this->user_id,\"$this->presentation\",\"$this->unit\",$this->category_id,$this->inventary_min,\"$this->is_bsf\",NOW())";
+		
+		//echo $sql;
+		//exit;
 		return Executor::doit($sql);
 
 	}
@@ -59,6 +56,17 @@ class ProductData {
     
 	}	
 
+
+	public function update_images_product($fileName, $idproduct){
+		$sql = "insert into images (image_name,id_product,created_at) ";
+		$sql .= "value (\"$fileName\",$idproduct,NOW() )";
+		echo $sql;
+		exit;		
+		
+		return Executor::doit($sql);
+    
+	}
+
 	public static function delById($id){
 		$sql = "delete from ".self::$tablename." where id=$id";
 		Executor::doit($sql);
@@ -70,17 +78,30 @@ class ProductData {
 
 // partiendo de que ya tenemos creado un objecto ProductData previamente utilizamos el contexto
 	public function update(){
-		//	porcentaje de ganancia 
 		$pg = $this->percentage;
 		$divisas = DivisaData::getAll();
+		
 		//ultimo valor del dolar  
 		$ultimo_elemento=count($divisas)-1; 
 		$valor_dolar = ($divisas[$ultimo_elemento]->monto);
-		$finalPrice = ((($this->price_in * $pg) /100 ) + $this->price_in ) * $valor_dolar ;
 		
-			$sql = "update ".self::$tablename." set barcode=\"$this->barcode\",name=\"$this->name\",price_in=\"$this->price_in\",price_out=\"$finalPrice\",unit=\"$this->unit\",presentation=\"$this->presentation\",category_id=$this->category_id,inventary_min=\"$this->inventary_min\",description=\"$this->description\",is_active=\"$this->is_active\",is_bsf=\"$this->is_bsf\" where id=$this->id";
+		//Precio costo en Bsf
+		$PrecioNeto = $this->price_in * $valor_dolar  ;
+		//Cantidad de Ganancia en Dolar
+		$PrecioGanciaDL = (($this->price_in * $pg) /100 )  + $product->price_in ;
+		//Cantidad Ganancia en Bs
+		$PrecioGanciaBs = ((($this->price_in * $pg) /100 ) * $valor_dolar ) ;
+		//Precio venta en dolar
+		$PrecioVentaDl = ((($this->price_in * $pg) /100 ) + $this->price_in )  ;	
+		//Precio Venta en Bolivares
+		$PrecioVentaBS = $PrecioNeto + $PrecioGanciaBs;
+
+			$sql = "update ".self::$tablename." set barcode=\"$this->barcode\",name=\"$this->name\",description=\"$this->description\",attribute=\"$this->attribute\",price_in=\"$this->price_in\",price_out=\"$PrecioVentaDl\",price_out_bs=\"$PrecioVentaBS\",gain_dl=\"$PrecioGanciaDL\",gain_bs=\"$PrecioGanciaBs\",unit=\"$this->unit\",presentation=\"$this->presentation\",category_id=$this->category_id,inventary_min=\"$this->inventary_min\",is_active=\"$this->is_active\",is_bsf=\"$this->is_bsf\" where id=$this->id";
+		
+		//echo $sql;
+		//exit;
 		Executor::doit($sql);
-	    //actualizo precio
+	    
 	}
 
 	public function updatePriceOut($price){

@@ -1,5 +1,5 @@
 <?php
-
+ini_set("display_errors", 1);
 /*
  * DataTables example server-side processing script.
  *
@@ -28,26 +28,50 @@ $primaryKey = 'id';
 // The `db` parameter represents the column name in the database, while the `dt`
 // parameter represents the DataTables column identifier. In this case simple
 // indexes
+/*require('../../../core/app/model/DivisaData.php' );
+$divisas = DivisaData::getAll();
+$ultimo_elemento=count($divisas)-1; 
+$valor_dolar = ($divisas[$ultimo_elemento]->monto);*/
+
 $columns = array(
 	array( 'db' => '`p`.`image`', 'dt' => 0, 'field' => 'image', 'formatter' => function( $d, $row ) {
 		return '<a href="#" title="Galeria"><img class="thumbnail img-responsive" id="' . $row["id"] . '" src="storage/products/'.$d.'"  style="width:64px;" ></a>';
 	}),
-	array( 'db' => '`p`.`name`',  'dt' => 1, 'field' => 'name' ),
-	array( 'db' => '`p`.`description`',   'dt' => 2, 'field' => 'description' ),
-	array( 'db' => '`p`.`price_in`', 'dt' => 3, 'field' => 'price_in', 'formatter' => function( $d, $row ) {
-				return '$' . number_format($d,2,'.',',');
-	}),
-	array( 'db' => '`p`.`price_out`', 'dt' => 4, 'field' => 'price_out', 'formatter' => function( $d, $row ) {
-				return '$' . number_format($d,2,'.',',');
-	}),
+	array( 'db' => '`p`.`barcode`',  'dt' => 1, 'field' => 'barcode' ),
+	array( 'db' => '`p`.`name`',  'dt' => 2, 'field' => 'name' ),
+	array( 'db' => '`p`.`description`',   'dt' => 3, 'field' => 'description' ),
+	array( 'db' => '`p`.`attribute`',   'dt' => 4, 'field' => 'attribute' ),
 	array( 'db' => '`c`.`name`',     'dt' => 5, 'field' => 'name' ),
-	array( 'db' => '`p`.`is_active`', 'dt' => 6, 'is_active' => 'image', 'formatter' => function( $d, $row ) {
+	array( 'db' => '`p`.`price_in`', 'dt' => 6, 'field' => 'price_in', 'formatter' => function( $d, $row ) {
+				return '$' . number_format($d,2,'.',',');
+	}),
+	array( 'db' => '`p`.`price_out`', 'dt' => 7, 'field' => 'price_out', 'formatter' => function( $d, $row ) {
+				return '$' . number_format($d,2,'.',',');
+	}),
+	array( 'db' => '`p`.`price_out_bs`', 'dt' => 8, 'field' => 'price_out_bs', 'formatter' => function( $d, $row ) {
+				return 'Bs.' . number_format($d,2,'.',',');
+	}),
+	array( 'db' => '`p`.`gain_dl`', 'dt' => 9, 'field' => 'gain_dl', 'formatter' => function( $d, $row ) {
+				return '$' . number_format($d,2,'.',',');
+	}),	
+	array( 'db' => '`p`.`gain_bs`', 'dt' => 10, 'field' => 'gain_bs', 'formatter' => function( $d, $row ) {
+				return 'Bs' . number_format($d,2,'.',',');
+	}),
+
+	array( 'db' => '`p`.`percentage`', 'dt' => 11, 'field' => 'percentage', 'formatter' => function( $d, $row ) {
+					return number_format($d,2,'.',','). '%';
+		}),
+	array( 'db' => '`p`.`unit`',     'dt' => 12, 'field' => 'unit' ),
+	array( 'db' => '`p`.`presentation`',     'dt' => 13, 'field' => 'presentation' ),
+	array( 'db' => '`p`.`inventary_min`',     'dt' => 14, 'field' => 'inventary_min' ),
+
+	array( 'db' => '`p`.`is_active`', 'dt' => 15, 'is_active' => 'image', 'formatter' => function( $d, $row ) {
 		return '<a title="Activar/Desactivar" href="index.php?view=editproduct&id=' . $row["id"] . '" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-ok"></i></a>';
 	}),
-	array( 'db' => '`p`.`created_at`', 'dt' => 7, 'field' => 'created_at', 'formatter' => function( $d, $row ) {
+	array( 'db' => '`p`.`created_at`', 'dt' => 16, 'field' => 'created_at', 'formatter' => function( $d, $row ) {
 				return date( 'd/m/Y', strtotime($d));
 	}),
-	array( 'db' => '`p`.`id`', 'dt' => 8, 'field' => 'id', 'formatter' => function( $d, $row ) {
+	array( 'db' => '`p`.`id`', 'dt' => 17, 'field' => 'id', 'formatter' => function( $d, $row ) {
 				$buttons='<a title="Editar" href="index.php?view=editproduct&id=' . $row["id"] . '" class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-pencil"></i></a>
 		<a title="Eliminar" href="index.php?view=delproduct&id=' . $row["id"] . '" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>
 		<a title="Duplicar" class="btn btn-xs btn-info clone" id=' . $row["id"] . '"><i class="glyphicon glyphicon-file"></i></a>';

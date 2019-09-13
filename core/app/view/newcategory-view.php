@@ -8,7 +8,7 @@
   <div class="form-group">
     <label for="inputEmail1" class="col-lg-2 control-label">Nombre*</label>
     <div class="col-md-6">
-      <input type="text" name="name" required class="form-control" id="name" placeholder="Nombre">
+      <input type="text" name="name" required class="form-control" id="name" placeholder="Nombre"  style="text-transform:uppercase;">
     </div>
   </div>
 

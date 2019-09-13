@@ -1,14 +1,15 @@
 <?php
-
+//ini_set("display_errors", 1);
 if(count($_POST)>0){
   $product = new ProductData();
-  $product->barcode = $_POST["barcode"];
-  $product->name = $_POST["name"];
+  $product->barcode = strtoupper($_POST["barcode"]);
+  $product->name = strtoupper($_POST["name"]);
   $product->price_in = $_POST["price_in"];
   $product->percentage = $_POST["percentage"];
   $product->price_out = $_POST["price_out"];
   $product->unit = $_POST["unit"];
-  $product->description = $_POST["description"];
+  $product->description = ucfirst($_POST["description"]);
+  $product->attribute = strtoupper($_POST["attribute"]);
   $product->presentation = $_POST["presentation"];
   //$product->inventary_min = $_POST["inventary_min"];
   $category_id="NULL";
@@ -37,7 +38,7 @@ if(count($_POST)>0){
           $files[$i][$k] = $v;
         }
       }
-      $inserted_product = $product->add_with_image();
+      $inserted_product = $product->add();
       $idproduct = $inserted_product[1];
 
       foreach ($files as $file) {
@@ -72,6 +73,7 @@ if(count($_POST)>0){
         }
      }
  }else{
+
    $prod= $product->add();
  }    
 

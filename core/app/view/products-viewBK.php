@@ -1,10 +1,10 @@
 <?php
-$divisas = DivisaData::getAll();
 
 //$insertProduct = ProductData::addTestData(1000);	
 //$insertImage = ProductData::addImageData();
 
 //ulmito valor del dolar  
+$divisas = DivisaData::getAll();
 $ultimo_elemento=count($divisas)-1; 
 $valor_dolar = ($divisas[$ultimo_elemento]->monto);
 ?>

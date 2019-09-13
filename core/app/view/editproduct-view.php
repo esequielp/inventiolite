@@ -35,19 +35,32 @@ if($product!=null):
 
 </div>
 
-<input type="hidden" name="images_id" id="images_id">
+<input type="text" name="images_id" id="images_id">
   <div class="form-group">
-    <label for="inputEmail1" class="col-lg-3 control-label">Codigo de barras*</label>
+    <label for="inputEmail1" class="col-lg-3 control-label">Codigo*</label>
     <div class="col-md-8">
-      <input type="text" name="barcode" class="form-control" id="barcode" value="<?php echo $product->barcode; ?>" placeholder="Codigo de barras del Producto">
+      <input type="text" name="barcode" class="form-control" id="barcode" value="<?php echo $product->barcode; ?>" placeholder="Codigo del Producto " style="text-transform:uppercase;" maxlength="15">
     </div>
   </div>
     <div class="form-group">
     <label for="inputEmail1" class="col-lg-3 control-label">Nombre*</label>
     <div class="col-md-8">
-      <input type="text" name="name" class="form-control" id="name" value="<?php echo $product->name; ?>" placeholder="Nombre del Producto">
+      <input type="text" name="name" class="form-control" id="name" value="<?php echo $product->name; ?>" placeholder="Nombre del Producto" style="text-transform:capitalize;" maxlength="100">
     </div>
   </div>
+    <div class="form-group">
+    <label for="inputEmail1" class="col-lg-3 control-label">Descripcion</label>
+    <div class="col-md-8">
+      <input type="text" name="description" class="form-control" id="description" value="<?php echo $product->description; ?>" placeholder="Descripcion del Producto">
+    </div>
+  </div> 
+    <div class="form-group">
+    <label for="inputEmail1" class="col-lg-3 control-label">Atributos</label>
+    <div class="col-md-8">
+      <input type="text" name="attribute" class="form-control" id="attribute" value="<?php echo $product->attribute; ?>" placeholder="Marca-Modelo-Etc (Separar con - )">
+    </div>
+  </div> 
+
     <div class="form-group">
     <label for="inputEmail1" class="col-lg-3 control-label">Categoria</label>
     <div class="col-md-8">
@@ -59,16 +72,9 @@ if($product!=null):
       </select>    </div>
   </div>
   <div class="form-group">
-    <label for="inputEmail1" class="col-lg-3 control-label">Descripcion</label>
-    <div class="col-md-8">
-      <textarea name="description" class="form-control" id="description" placeholder="Descripcion del Producto"><?php echo $product->description;?></textarea>
-    </div>
-  </div>
-
-  <div class="form-group">
     <label for="inputEmail1" class="col-lg-3 control-label">Precio de Entrada*</label>
     <div class="col-md-8">
-      <input type="text" name="price_in" class="form-control" value="<?php echo $product->price_in; ?>" id="price_in" placeholder="Precio de entrada">
+      <input type="text" name="price_in" class="form-control" value="<?php echo $product->price_in; ?>" id="price_in" placeholder="Precio de entrada" maxlength="10">
     </div>
   </div>
   <div class="form-group">
@@ -81,28 +87,26 @@ if($product!=null):
   </div>
     </div>
   </div>
-<div class="form-group">
+ <div class="form-group">
   <label for="inputEmail1" class="col-lg-3 control-label">Porcentaje Gan.*</label>
    <div class="col-md-8">
   <select class="form-control" name="percentage" id="percentage" >
-    
-
-    <option value="5"  <?php if( $product->percentage ==5 ){ echo "selected";}?>>5</option>
-    <option value="10" <?php if( $product->percentage ==10 ){ echo "selected";}?>>10</option>
-    <option value="15" <?php if( $product->percentage ==15 ){ echo "selected";}?>>15</option>
-    <option value="20" <?php if( $product->percentage ==20 ){ echo "selected";}?>>20</option>
-    <option value="25" <?php if( $product->percentage ==25 ){ echo "selected";}?>>25</option>
-    <option value="30" <?php if( $product->percentage ==30 ){ echo "selected";}?>>30</option>
-    <option value="40" <?php if( $product->percentage ==40 ){ echo "selected";}?>>40</option>
-    <option value="50" <?php if( $product->percentage ==50 ){ echo "selected";}?>>50</option>
-    <option value="60" <?php if( $product->percentage ==60 ){ echo "selected";}?>>60</option>
-    <option value="70" <?php if( $product->percentage ==70 ){ echo "selected";}?>>70</option>
-    <option <?php if( $product->percentage == 80 ){ echo "selected";}?>>80</option>
-    <option value="90" <?php if( $product->percentage ==90 ){ echo "selected";}?>>90</option>
-    <option value="100" <?php if( $product->percentage ==100 ){ echo "selected";}?>>100</option>
-    <option value="120" <?php if( $product->percentage ==120 ){ echo "selected";}?>>120</option>
-    <option value="150" <?php if( $product->percentage ==150 ){ echo "selected";}?>>150</option>
-    <option value="200" <?php if( $product->percentage ==200 ){ echo "selected";}?>>200</option>
+    <option value="5">5</option>
+    <option value="10" >10</option>
+    <option value="15">15</option>
+    <option value="20">20</option>
+    <option value="25">25</option>
+    <option value="30" selected>30</option>
+    <option value="40">40</option>
+    <option value="50">50</option>
+    <option value="60">60</option>
+    <option value="70">70</option>
+    <option value="80">80</option>
+    <option value="90">90</option>
+    <option value="100">100</option>
+    <option value="120">120</option>
+    <option value="150">150</option>
+    <option value="200">200</option>
     </select>
     </div>
 </div> 

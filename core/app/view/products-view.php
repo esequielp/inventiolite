@@ -33,37 +33,46 @@ if(count($products)>0){
 	<table class="table table-bordered table-hover table-responsive-sm datatableProducts"  width="100%"  >
 		<thead>
 			<tr>
-				<!-- <th>Cod. Bar</th> -->
 				<th>Imagen</th>
-				<th style="width:500px;">Nombre</th>
+				<th >Cod</th>
+				<th >Nombre</th>
 				<th >Descripcion</th>
-				<th>Costo</th>
-				<th>Precio($)</th>
-				<!-- <th>Porcentaje</th> -->
+				<th>Atributos</th>
 				<th>Categoria</th>
-				<!-- <th>Minima</th> -->
+				<th>Costo($)</th>
+				<th>P-Venta($)</th>
+				<th>P-Venta(Bs)</th>
+				<th>Ganancia($)</th>
+				<th>Ganancia(Bs)</th>
+				<th>Porcentaje</th>
+				<th>Unidad</th>
+				<th>Presentacion</th>
+				<th>Minima</th>
 				<th>Status</th>
 				<th>Fecha</th>
 				<th>Accion</th>
-				
-
 			</tr>
 		</thead>
 		<tfoot>
 			<tr>
-				<!-- <th>Cod. Bar</th> -->
 				<th>Imagen</th>
-				<th>Nombre</th>
-				<th>Descripcion</th>
-				<th>Costo</th>
-				<th>Precio($)</th>
-				<!-- <th>Porcentaje</th> -->
+				<th >Cod</th>
+				<th >Nombre</th>
+				<th >Descripcion</th>
+				<th>Atributos</th>
 				<th>Categoria</th>
-				<!-- <th>Minima</th> -->
+				<th>Costo($)</th>
+				<th>P-Venta($)</th>
+				<th>P-Venta(Bs)</th>
+				<th>Ganancia($)</th>
+				<th>Ganancia(Bs)</th>
+				<th>Porcentaje</th>
+				<th>Unidad</th>
+				<th>Presentacion</th>
+				<th>Minima</th>
 				<th>Status</th>
 				<th>Fecha</th>
 				<th>Accion</th>
-				
 			</tr>
 		</tfoot>	
 	</table>

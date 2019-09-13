@@ -14,21 +14,21 @@ $categories = CategoryData::getAll();
     </div>
   </div>
   <div class="form-group">
-    <label for="inputEmail1" class="col-lg-2 control-label">Codigo de Barras*</label>
+    <label for="inputEmail1" class="col-lg-2 control-label">Codigo*</label>
     <div class="col-md-6">
-      <input type="text" name="barcode" id="product_code" class="form-control" id="barcode" placeholder="Codigo de Barras del Producto">
+      <input type="text" name="barcode" required id="product_code" class="form-control" id="barcode" placeholder="Codigo del Producto" style="text-transform:uppercase;" maxlength="15">
     </div>
   </div>
   <div class="form-group">
     <label for="inputEmail1" class="col-lg-2 control-label">Nombre*</label>
     <div class="col-md-6">
-      <input type="text" name="name" required class="form-control" id="name" placeholder="Nombre del Producto">
+      <input type="text" name="name" required class="form-control" id="name" placeholder="Nombre del Producto" style="text-transform:capitalize;" maxlength="100">
     </div>
   </div>
   <div class="form-group">
-    <label for="inputEmail1" class="col-lg-2 control-label">Categoria</label>
+    <label for="inputEmail1" class="col-lg-2 control-label">Categoria*</label>
     <div class="col-md-6">
-    <select name="category_id" class="form-control select2">
+    <select name="category_id" class="form-control select2" required>
     <option value="">-- NINGUNA --</option>
     <?php foreach($categories as $category):?>
       <option value="<?php echo $category->id;?>"><?php echo $category->name;?></option>
@@ -42,9 +42,15 @@ $categories = CategoryData::getAll();
     </div>
   </div>
   <div class="form-group">
+    <label for="inputEmail1" class="col-lg-2 control-label">Atributos</label>
+    <div class="col-md-6">
+      <textarea name="attribute" class="form-control" id="attribute" placeholder="Marca-Modelo-Etc (Separar con - )"></textarea>
+    </div>
+  </div>
+  <div class="form-group">
     <label for="inputEmail1" class="col-lg-2 control-label">Precio de Entrada*</label>
     <div class="col-md-6">
-      <input type="text" name="price_in" required class="form-control" id="price_in" placeholder="Precio de entrada">
+      <input type="text" name="price_in" required class="form-control" id="price_in" placeholder="Precio de entrada" maxlength="10">
     </div>
   </div>
      
@@ -58,8 +64,6 @@ $categories = CategoryData::getAll();
   </div>
     </div>
   </div>
-
-
  <div class="form-group">
   <label for="inputEmail1" class="col-lg-2 control-label">Porcentaje Gan.*</label>
    <div class="col-md-6">
@@ -83,37 +87,30 @@ $categories = CategoryData::getAll();
     </select>
     </div>
 </div> 
-
-<!--   <div class="form-group">
-    <label for="inputEmail1" class="col-lg-2 control-label">Precio de Salida*</label>
-    <div class="col-md-6">
-      <input type="text" name="price_out" required class="form-control" id="price_out" placeholder="Precio de salida">
-    </div>
-  </div> -->
   <div class="form-group">
     <label for="inputEmail1" class="col-lg-2 control-label">Unidad*</label>
     <div class="col-md-6">
-      <input type="text" name="unit" required class="form-control" id="unit" placeholder="Unidad del Producto">
+      <input type="text" name="unit" required class="form-control" id="unit" placeholder="Unidad del Producto" maxlength="4">
     </div>
   </div>
 
   <div class="form-group">
     <label for="inputEmail1" class="col-lg-2 control-label">Presentacion</label>
     <div class="col-md-6">
-      <input type="text" name="presentation" class="form-control" id="inputEmail1" placeholder="Presentacion del Producto">
+      <input type="text" name="presentation" class="form-control" id="inputEmail1" placeholder="Presentacion del Producto" maxlength="4">
     </div>
   </div>
   <div class="form-group">
     <label for="inputEmail1" class="col-lg-2 control-label">Minima en inventario:</label>
     <div class="col-md-6">
-      <input type="text" name="inventary_min" class="form-control" id="inputEmail1" placeholder="Minima en Inventario (Default 10)">
+      <input type="text" name="inventary_min" class="form-control" id="inputEmail1" placeholder="Minima en Inventario (Default 10)" maxlength="4">
     </div>
   </div>
 
   <div class="form-group">
     <label for="inputEmail1" class="col-lg-2 control-label">Inventario inicial:</label>
     <div class="col-md-6">
-      <input type="text" name="q" class="form-control" id="inputEmail1" placeholder="Inventario inicial">
+      <input type="text" name="q" class="form-control" id="inputEmail1" placeholder="Inventario inicial" maxlength="4">
     </div>
   </div>
 

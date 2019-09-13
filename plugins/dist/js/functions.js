@@ -163,6 +163,9 @@ $('.datatableProducts').DataTable( {
     "iDisplayLength": 5,
     "aLengthMenu": [[5,
     10, 50,100, -1], [5, 10, 50,100, "All"]],
+     "columnDefs": [
+      { "width": "10%", "targets": [2,3] }
+    ],
      //dom: 'Blfrtip',
     "dom": '<"top"Bf>rt<"bottom"lip><"clear">',
     buttons: [
@@ -201,6 +204,7 @@ $('.datatableProducts').DataTable( {
     "processing": true,
     "serverSide": true,
     "ajax": "http://localhost/inventio-lite-master/plugins/server_side/scripts/server_processing.php"
+       
     //"ajax:":dataSet
    /* orderCellsTop: true,
     fixedHeader: true*/
