@@ -2,6 +2,21 @@ $("#twitter").hide();
 $("#twitter2").hide();
 $("#twitter3").hide();
 
+$(".allownumericwithdecimal").on("keypress keyup blur",function (event) {
+            //this.value = this.value.replace(/[^0-9\.]/g,'');
+     $(this).val($(this).val().replace(/[^0-9\.]/g,''));
+            if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+        });
+
+ $(".allownumericwithoutdecimal").on("keypress keyup blur",function (event) {    
+           $(this).val($(this).val().replace(/[^\d].+/, ""));
+            if ((event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+        });
+
 $( "#ShowDivisa" ).click(function() {
   $( "#twitter" ).toggle( "slow" );
   $( "#twitter2" ).toggle( "slow" );
@@ -19,11 +34,7 @@ $( "#ShowDivisa" ).click(function() {
         .find(".active img")
         .attr("title"));
    });
-
    //FUNCION QUE MUESTRA EL MODAL CON LAS IMAGENES
-   /* when clicking a thumbnail */
-  // $(".row .thumbnail").click(function(){
-   //$(".row .thumbnail").on('click', '.thumbnail', function() {
   $(document).on("click",".thumbnail", function () {
 
     var id = $(this).attr('id');
@@ -33,8 +44,6 @@ $( "#ShowDivisa" ).click(function() {
     content.empty();  
     title.empty();
   
-  	//var id = this.id;  
-    //alert(id);
      var repo = $("#img-repo .item");
      var repoCopy = repo.filter("#" + id).clone();
      var active = repoCopy.first();
@@ -47,7 +56,7 @@ $( "#ShowDivisa" ).click(function() {
   	$("#modal-gallery").modal("show");
   });
 
-
+//Eliminar imagenes update product
 $( ".del_img" ).click(function() {
 
 //ELIMINAR IMAGEN VISTA EDITAR PRODUCTOS
@@ -66,7 +75,7 @@ if (r == true) {
   //alert(idtext);
   //var idtext2 = idtext.slice(0, 1);
   // $( "#images_id" ).val(idtext2);
-  $(this).remove();
+  $("#imagen_producto").remove();
 
 }
  
@@ -166,6 +175,10 @@ $('.datatableProducts').DataTable( {
      "columnDefs": [
       { "width": "10%", "targets": [2,3] }
     ],
+    "search": {
+      "caseInsensitive": true
+    },
+    "order": [[ 16, "desc" ]],
      //dom: 'Blfrtip',
     "dom": '<"top"Bf>rt<"bottom"lip><"clear">',
     buttons: [
@@ -190,16 +203,6 @@ $('.datatableProducts').DataTable( {
                 titleAttr: 'PDF'
             }
       ],
-/*    buttons: [
-            {
-                extend: 'excelHtml5',
-                title: 'Data export'
-            },
-            {
-                extend: 'pdfHtml5',
-                title: 'Data export'
-            }
-    ],*/
     responsive: true,
     "processing": true,
     "serverSide": true,
@@ -281,57 +284,3 @@ $(document).on("click",".clone", function () {
         alert( 'Clicked row id '+id );
         //onsole.log( type );
     } );
-/*
-   // Setup - add a text input to each footer cell
-    $('.datatable thead tr').clone(true).appendTo( '.datatable thead' );
-    $('.datatable thead tr:eq(1) th').each( function (i) {
-        var title = $(this).text();
-        
-       if ( (title !='Imagen') && (title !='Precio($)') && (title !='Precio(Bs)')  && (title !='Activo') && (title !='Acciones')  ) {
-
-        $(this).html( '<input type="text" size="12" clas="form-control input-sm" placeholder="Buscar '+title+'" />' );
- 
-        $( 'input', this ).on( 'keyup change', function () {
-            if ( table.column(i).search() !== this.value ) {
-                table
-                    .column(i)
-                    .search( this.value )
-                    .draw();
-            }
-        } );
-      }
-    } );
- */
-
-
-  $('#example').DataTable( {
-        serverSide: true,
-        /*ordering: false,
-        searching: false,*/
- /*       ajax: function ( data, callback, settings ) {
-            var out = [];
- 
-            for ( var i=data.start, ien=data.start+data.length ; i<ien ; i++ ) {
-                out.push( [ i+'-1', i+'-2', i+'-3', i+'-4', i+'-5' ] );
-            }
- 
-            setTimeout( function () {
-                callback( {
-                    draw: data.draw,
-                    data: out,
-                    recordsTotal: 5000000,
-                    recordsFiltered: 5000000
-                } );
-            }, 50 );
-        },*/
-      ajax: {
-              url: '/data-source',
-              type: 'POST'
-          },
-
-        scrollY: 200,
-        scroller: {
-            loadingIndicator: true
-        },
-    } );
-

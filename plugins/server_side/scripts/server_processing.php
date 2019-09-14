@@ -28,20 +28,19 @@ $primaryKey = 'id';
 // The `db` parameter represents the column name in the database, while the `dt`
 // parameter represents the DataTables column identifier. In this case simple
 // indexes
-/*require('../../../core/app/model/DivisaData.php' );
-$divisas = DivisaData::getAll();
-$ultimo_elemento=count($divisas)-1; 
-$valor_dolar = ($divisas[$ultimo_elemento]->monto);*/
-
 $columns = array(
 	array( 'db' => '`p`.`image`', 'dt' => 0, 'field' => 'image', 'formatter' => function( $d, $row ) {
 		return '<a href="#" title="Galeria"><img class="thumbnail img-responsive" id="' . $row["id"] . '" src="storage/products/'.$d.'"  style="width:64px;" ></a>';
 	}),
-	array( 'db' => '`p`.`barcode`',  'dt' => 1, 'field' => 'barcode' ),
-	array( 'db' => '`p`.`name`',  'dt' => 2, 'field' => 'name' ),
+	array( 'db' => '`p`.`barcode`', 'dt' => 1, 'field' => 'barcode', 'formatter' => function( $d, $row ) {
+				$buttons='<a title="Editar" href="index.php?view=editproduct&id=' . $row["id"] . '" class="btn btn-xs btn-warning">' . $row["barcode"] . ' </a>';
+                return $buttons;
+	}),		
+
+	array( 'db' => '`p`.`name`',     'dt' => 2, 'field' => 'product_name', 'as' => 'product_name' ),
 	array( 'db' => '`p`.`description`',   'dt' => 3, 'field' => 'description' ),
 	array( 'db' => '`p`.`attribute`',   'dt' => 4, 'field' => 'attribute' ),
-	array( 'db' => '`c`.`name`',     'dt' => 5, 'field' => 'name' ),
+	array( 'db' => '`c`.`name`',     'dt' => 5, 'field' => 'category_name', 'as' => 'category_name' ),
 	array( 'db' => '`p`.`price_in`', 'dt' => 6, 'field' => 'price_in', 'formatter' => function( $d, $row ) {
 				return '$' . number_format($d,2,'.',',');
 	}),

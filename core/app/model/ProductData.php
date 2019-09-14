@@ -45,36 +45,22 @@ class ProductData {
 		return Executor::doit($sql);
 
 	}
-
-	public function add_images_product($fileName, $idproduct){
+	//guardar imagenes
+	public function add_images_product($fileName, $idproduct,$primerafoto){
+		
 		$sql = "insert into images (image_name,id_product,created_at) ";
 		$sql .= "value (\"$fileName\",$idproduct,NOW() )";
+		
+		if ($primerafoto ==1) {
+			# code...
+			$sql_foto_principal = "update ".self::$tablename." set image=\"$fileName\"  where id=$idproduct";
+			Executor::doit($sql_foto_principal);
+		}
 		//echo $sql;
 		//exit;		
-		
 		return Executor::doit($sql);
-    
-	}	
-
-
-	public function update_images_product($fileName, $idproduct){
-		$sql = "insert into images (image_name,id_product,created_at) ";
-		$sql .= "value (\"$fileName\",$idproduct,NOW() )";
-		echo $sql;
-		exit;		
-		
-		return Executor::doit($sql);
-    
 	}
 
-	public static function delById($id){
-		$sql = "delete from ".self::$tablename." where id=$id";
-		Executor::doit($sql);
-	}
-	public function del(){
-		$sql = "delete from ".self::$tablename." where id=$this->id";
-		Executor::doit($sql);
-	}
 
 // partiendo de que ya tenemos creado un objecto ProductData previamente utilizamos el contexto
 	public function update(){
@@ -142,6 +128,36 @@ class ProductData {
 		$query = Executor::doit($sql);
 		return Model::one($query[0],new ProductData());
 
+	}
+	//****DEL PRODUCTO AND IMAGES ****//
+	//actualizar imagenes	
+	public function del(){
+		$sql = "delete from ".self::$tablename." where id=$this->id";
+		Executor::doit($sql);
+	}
+	public static function delById($id){
+		$sql = "delete from ".self::$tablename." where id=$id";
+		Executor::doit($sql);
+	}
+	
+	public function update_images_product($fileName, $idproduct){
+		$sql = "insert into images (image_name,id_product,created_at) ";
+		$sql .= "value (\"$fileName\",$idproduct,NOW() )";
+		//echo $sql;
+		//exit;		
+		return Executor::doit($sql);
+	}
+
+	public static function getUrlImages($idimagenes){
+		$sql = "select image_name from images where id in $idimagenes";
+		$query = Executor::doit($sql);
+		return Model::many($query[0],new ProductData());
+	}	
+	public function delImages($idimagenes){
+		$sql = "delete from images where id in $idimagenes";
+		/*echo $sql;
+		exit;*/
+		Executor::doit($sql);
 	}
 
 

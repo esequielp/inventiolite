@@ -16,18 +16,46 @@ if(count($_POST)>0){
 	$product->unit = $_POST["unit"];
 	$product->presentation = $_POST["presentation"];
 	$product->inventary_min = $_POST["inventary_min"];
+	$product->inventary_min = $_POST["images_id"];
+
+	
 	$category_id="NULL";
   
-  if($_POST["category_id"]!=""){ $category_id=$_POST["category_id"];}
+	if($_POST["category_id"]!=""){ $category_id=$_POST["category_id"];}
 
-  $is_active=0;
-  if(isset($_POST["is_active"])){ $is_active=1;}
+	//si tiene imagenes para eliminar 
+	if($_POST["images_id"]!=""){ 
+	
+		$id_imagenes =$_POST["images_id"];
+		
+		$imagarray = explode("-",$id_imagenes);
 
- if($_POST["is_bsf"]=='on'){ 
-    $is_bsf=1;
-  }else{
-    $is_bsf=0;
-  }  
+		$idimagenes = "(";
+		foreach ($imagarray as $key => $value) {
+			echo "<br>" . $value ."<br>";
+			$idimagenes .= $value .",";
+		}
+		$idimagenes = substr($idimagenes, 0, -2);
+		$idimagenes = $idimagenes . ")";
+		//busco las url de las imagenes 
+		$url_images = ProductData::getUrlImages($idimagenes);
+		//borro las imagenes
+		foreach ($url_images as $url_image ) {
+			# code...
+			unlink('storage/products/'.$url_image->image_name);
+		}
+		//borro los registros
+		$product->delImages($idimagenes);
+	}
+
+	$is_active=0;
+	if(isset($_POST["is_active"])){ $is_active=1;}
+
+	if($_POST["is_bsf"]=='on'){ 
+		$is_bsf=1;
+	}else{
+		$is_bsf=0;
+	}  
   $product->is_bsf =$is_bsf;
   $product->is_active=$is_active;
   $product->category_id=$category_id;
@@ -35,7 +63,7 @@ if(count($_POST)>0){
 	$product->user_id = $_SESSION["user_id"];
 	$product->update();
 
- if(isset($_FILES["images"])){
+ if($_FILES['images']["name"][0] !=NULL ) {
 
       $files = array();
       foreach ($_FILES['images'] as $k => $l) {
@@ -62,8 +90,8 @@ if(count($_POST)>0){
                   $handle->file_overwrite =true;
                   $handle->Process("storage/products/");
                       if ($handle->processed) {
-                        echo 'OK';
-                        echo $handle->file_src_name;
+                        //echo 'OK';
+                        //echo $handle->file_src_name;
                       $product->image = $handle->file_src_name;
                       $fileName = $handle->file_src_name;
                       $product->update_images_product($fileName , $idproduct);
@@ -80,9 +108,10 @@ if(count($_POST)>0){
         }
      }
  }else{
-
    $prod= $product->update();
  }  
+
+	
 
 	setcookie("prdupd","true");
 	print "<script>window.location='index.php?view=editproduct&id=$_POST[product_id]';</script>";

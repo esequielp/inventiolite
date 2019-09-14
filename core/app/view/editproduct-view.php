@@ -15,27 +15,27 @@ if($product!=null):
 
   <div class="form-group">
     <label for="inputEmail1" class="col-lg-3 control-label">Imagen*</label>
-     <input type="file" name="image" id="name" placeholder="">
+      <input type="file" name="images[]" id="images" multiple  placeholder="">
   </div>
 
 <div class="form-group">
-         <label for="inputEmail1" class="col-lg-3 control-label">Imagenes*</label>
+         <label for="inputEmail1" class="col-xs-3 control-label">Imagenes*</label>
         <?php 
         $imagenes = ProductData::getImagesProduct($product->id);
         foreach($imagenes as $image):?>
-          <div class="col-md-2">
-          <div class="thumbnail container del_img" id="<?php echo $image->id; ?>">
-            <a href="#" title="Eliminar"  > <img class="img-responsive" title="<?php echo $product->name; ?>" src="storage/products/<?php echo $image->image_name;?>" style="width:50%"></a>
-            <div class="middle">
-              <div class="text" title="Eliminar"><i class="fa fa-trash"></i></div>
+          <div class="col-xs-3 col-sm-4cols">
+          <div class="thumbnail profile-pic" id="imagen_producto">
+            <a href="#" title="Eliminar"  > <img class="img-responsive" title="<?php echo $product->name; ?>" src="storage/products/<?php echo $image->image_name;?>" ></a>
+            <div class="edit del_img" id="<?php echo $image->id; ?>">
+              <a href="#" title="Eliminar"><i class="fa fa-trash fa-lg"></i>
+              </a>
             </div>
           </div>
           </div>
         <?php endforeach;?> 
-
 </div>
 
-<input type="text" name="images_id" id="images_id">
+<input type="hidden" name="images_id" id="images_id">
   <div class="form-group">
     <label for="inputEmail1" class="col-lg-3 control-label">Codigo*</label>
     <div class="col-md-8">
@@ -74,7 +74,7 @@ if($product!=null):
   <div class="form-group">
     <label for="inputEmail1" class="col-lg-3 control-label">Precio de Entrada*</label>
     <div class="col-md-8">
-      <input type="text" name="price_in" class="form-control" value="<?php echo $product->price_in; ?>" id="price_in" placeholder="Precio de entrada" maxlength="10">
+      <input type="text" name="price_in" class="form-control allownumericwithdecimal" value="<?php echo $product->price_in; ?>" id="price_in" placeholder="Precio de entrada(use . para los decimales)" maxlength="10">
     </div>
   </div>
   <div class="form-group">
@@ -114,19 +114,19 @@ if($product!=null):
   <div class="form-group">
     <label for="inputEmail1" class="col-lg-3 control-label">Unidad*</label>
     <div class="col-md-8">
-      <input type="text" name="unit" class="form-control" id="unit" value="<?php echo $product->unit; ?>" placeholder="Unidad del Producto">
+      <input type="text" name="unit" class="form-control allownumericwithoutdecimal" id="unit" value="<?php echo $product->unit; ?>" placeholder="Unidad del Producto">
     </div>
   </div>
   <div class="form-group">
     <label for="inputEmail1" class="col-lg-3 control-label">Presentacion</label>
     <div class="col-md-8">
-      <input type="text" name="presentation" class="form-control" id="inputEmail1" value="<?php echo $product->presentation; ?>" placeholder="Presentacion del Producto">
+      <input type="text" name="presentation" class="form-control" id="inputEmail1" value="<?php echo $product->presentation; ?>" maxlength="50" placeholder="Presentacion del Producto">
     </div>
   </div>
   <div class="form-group">
     <label for="inputEmail1" class="col-lg-3 control-label">Minima en inventario:</label>
     <div class="col-md-8">
-      <input type="text" name="inventary_min" class="form-control" value="<?php echo $product->inventary_min;?>" id="inputEmail1" placeholder="Minima en Inventario (Default 10)">
+      <input type="text" name="inventary_min" class="form-control allownumericwithoutdecimal" value="<?php echo $product->inventary_min;?>" id="inputEmail1" placeholder="Minima en Inventario (Default 10)">
     </div>
   </div>
 

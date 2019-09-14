@@ -1,43 +1,23 @@
-.container {
+.profile-pic {
   position: relative;
-  width: 100%;
-  cursor: pointer;
-
+  display: inline-block;
 }
 
-.image {
-  opacity: 1;
+.profile-pic:hover .edit {
   display: block;
-  width: 100%;
-  height: auto;
-  transition: .5s ease;
-  backface-visibility: hidden;
 }
 
-.middle {
-  transition: .5s ease;
-  opacity: 0;
+.edit {
+  padding-top: 7px; 
+  padding-right: 7px;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  text-align: center;
+  right: 0;
+  top: 0;
+  display: none;
 }
 
-.container:hover .image {
-  opacity: 0.3;
-}
-
-.container:hover .middle {
-  opacity: 1;
-}
-
-.text {
-  background-color: red;
-  color: white;
-  font-size: 8px;
-  padding: 8px 16px;
+.edit a {
+  color: #000;
 }
 
 .logo-image{
@@ -59,3 +39,17 @@ ul.nav li.dropdown:hover ul.dropdown-menu { display: block; }
   background: #3c8dbc !important;
   right: 0px !important;
   }*/
+
+.col-sm-4cols{
+    position: relative;
+    min-height: 1px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+@media (min-width: 768px) {
+.col-sm-4cols {
+        width: 20%;
+        float: left;
+    }
+}

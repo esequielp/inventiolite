@@ -50,7 +50,7 @@ $categories = CategoryData::getAll();
   <div class="form-group">
     <label for="inputEmail1" class="col-lg-2 control-label">Precio de Entrada*</label>
     <div class="col-md-6">
-      <input type="text" name="price_in" required class="form-control" id="price_in" placeholder="Precio de entrada" maxlength="10">
+      <input type="text" name="price_in" required class="form-control allownumericwithdecimal" id="price_in" placeholder="Precio de entrada(use . para los decimales)" maxlength="10">
     </div>
   </div>
      
@@ -90,27 +90,27 @@ $categories = CategoryData::getAll();
   <div class="form-group">
     <label for="inputEmail1" class="col-lg-2 control-label">Unidad*</label>
     <div class="col-md-6">
-      <input type="text" name="unit" required class="form-control" id="unit" placeholder="Unidad del Producto" maxlength="4">
+      <input type="text" name="unit" required class="form-control allownumericwithoutdecimal" id="unit" placeholder="Unidad del Producto" maxlength="4">
     </div>
   </div>
 
   <div class="form-group">
     <label for="inputEmail1" class="col-lg-2 control-label">Presentacion</label>
     <div class="col-md-6">
-      <input type="text" name="presentation" class="form-control" id="inputEmail1" placeholder="Presentacion del Producto" maxlength="4">
+      <input type="text" name="presentation" class="form-control" id="inputEmail1" placeholder="Presentacion del Producto" maxlength="50">
     </div>
   </div>
   <div class="form-group">
     <label for="inputEmail1" class="col-lg-2 control-label">Minima en inventario:</label>
     <div class="col-md-6">
-      <input type="text" name="inventary_min" class="form-control" id="inputEmail1" placeholder="Minima en Inventario (Default 10)" maxlength="4">
+      <input type="text" name="inventary_min" class="form-control allownumericwithoutdecimal" id="inputEmail1" placeholder="Minima en Inventario (Default 10)" maxlength="4">
     </div>
   </div>
 
   <div class="form-group">
     <label for="inputEmail1" class="col-lg-2 control-label">Inventario inicial:</label>
     <div class="col-md-6">
-      <input type="text" name="q" class="form-control" id="inputEmail1" placeholder="Inventario inicial" maxlength="4">
+      <input type="text" name="q" class="form-control allownumericwithoutdecimal" id="inputEmail1" placeholder="Inventario inicial" maxlength="4">
     </div>
   </div>
 

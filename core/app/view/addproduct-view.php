@@ -28,9 +28,13 @@ if(count($_POST)>0){
   $product->is_bsf =$is_bsf;
   $product->user_id = $_SESSION["user_id"];
 
- if(isset($_FILES["images"])){
-
-      $files = array();
+//VERIFICO SI HAY UPLOAD
+if($_FILES['images']["name"][0] ==NULL ) {
+    //NO HAY IMAGEN
+    $prod= $product->add();
+}else {
+//SI HAY IMAGEN
+$files = array();
       foreach ($_FILES['images'] as $k => $l) {
         foreach ($l as $i => $v) {
         if (!array_key_exists($i, $files))
@@ -41,6 +45,7 @@ if(count($_POST)>0){
       $inserted_product = $product->add();
       $idproduct = $inserted_product[1];
 
+      $primerafoto = 1 ;
       foreach ($files as $file) {
         $handle = new Upload($file);
 
@@ -55,12 +60,12 @@ if(count($_POST)>0){
                   $handle->file_overwrite =true;
                   $handle->Process("storage/products/");
                       if ($handle->processed) {
-                        echo 'OK';
-                        echo $handle->file_src_name;
+                        //echo 'OK';
+                        //echo $handle->file_src_name;
                       $product->image = $handle->file_src_name;
                       $fileName = $handle->file_src_name;
-                      $product->add_images_product($fileName , $idproduct);
-
+                      $product->add_images_product($fileName , $idproduct,$primerafoto );
+                      $primerafoto++;
                       } else {
                         echo 'Error: ' . $handle->error;
                       }
@@ -72,11 +77,7 @@ if(count($_POST)>0){
           $prod= $product->add();
         }
      }
- }else{
-
-   $prod= $product->add();
- }    
-
+}
  
 if($_POST["q"]!="" || $_POST["q"]!="0"){
  $op = new OperationData();
@@ -92,6 +93,8 @@ print "<script>window.location='index.php?view=products';</script>";
 
 
 }
+
+
 
 
 ?>

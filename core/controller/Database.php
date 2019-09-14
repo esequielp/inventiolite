@@ -9,6 +9,9 @@ class Database {
 	function connect(){
 		$con = new mysqli($this->host,$this->user,$this->pass,$this->ddbb);
 		$con->query("set sql_mode=''");
+		$con->query("SET NAMES utf8");
+		$con->query("SET CHARACTER_SET");
+		
 		return $con;
 	}
 
