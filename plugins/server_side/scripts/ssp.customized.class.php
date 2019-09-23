@@ -148,7 +148,7 @@ class SSP {
         $dtColumns = SSP::pluck( $columns, 'dt' );
 
         if ( isset($request['search']) && $request['search']['value'] != '' ) {
-            $str = $request['search']['value'];
+            $str = strtoupper($request['search']['value']);
 
             for ( $i=0, $ien=count($request['columns']) ; $i<$ien ; $i++ ) {
                 $requestColumn = $request['columns'][$i];
@@ -157,7 +157,7 @@ class SSP {
 
                 if ( $requestColumn['searchable'] == 'true' ) {
                     $binding = SSP::bind( $bindings, '%'.$str.'%', PDO::PARAM_STR );
-                    $globalSearch[] = ($isJoin) ? $column['db']." LIKE ".$binding : "`".$column['db']."` LIKE ".$binding;
+                    $globalSearch[] = ($isJoin) ? "UPPER(".$column['db'].") LIKE ".$binding : "UPPER(`".$column['db']."`) LIKE ".$binding;
                 }
             }
         }
@@ -168,12 +168,12 @@ class SSP {
             $columnIdx = array_search( $requestColumn['data'], $dtColumns );
             $column = $columns[ $columnIdx ];
 
-            $str = $requestColumn['search']['value'];
+            $str = strtoupper($requestColumn['search']['value']);
 
             if ( $requestColumn['searchable'] == 'true' &&
                 $str != '' ) {
                 $binding = SSP::bind( $bindings, '%'.$str.'%', PDO::PARAM_STR );
-                $columnSearch[] = ($isJoin) ? $column['db']." LIKE ".$binding : "`".$column['db']."` LIKE ".$binding;
+                $columnSearch[] = ($isJoin) ? "UPPER(".$column['db'].") LIKE ".$binding : "UPPER(`".$column['db']."`) LIKE ".$binding;
             }
         }
 

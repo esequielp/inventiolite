@@ -2,7 +2,7 @@
 
 if(count($_POST)>0){
 	$product = ProductData::getById($_POST["product_id"]);
-
+	$idproduct = $_POST["product_id"];
 	$product->barcode = strtoupper($_POST["barcode"]);
 	$product->name = strtoupper($_POST["name"]);
 	$product->description = $_POST["description"];
@@ -17,13 +17,13 @@ if(count($_POST)>0){
 	$product->presentation = $_POST["presentation"];
 	$product->inventary_min = $_POST["inventary_min"];
 	$product->inventary_min = $_POST["images_id"];
-
+	
 	
 	$category_id="NULL";
   
 	if($_POST["category_id"]!=""){ $category_id=$_POST["category_id"];}
 
-	//si tiene imagenes para eliminar 
+	//SI TIENE IMAGENES PARA ELIMINAR ELIMINO
 	if($_POST["images_id"]!=""){ 
 	
 		$id_imagenes =$_POST["images_id"];
@@ -32,20 +32,46 @@ if(count($_POST)>0){
 
 		$idimagenes = "(";
 		foreach ($imagarray as $key => $value) {
-			echo "<br>" . $value ."<br>";
+			//echo "<br>" . $value ."<br>";
 			$idimagenes .= $value .",";
 		}
 		$idimagenes = substr($idimagenes, 0, -2);
 		$idimagenes = $idimagenes . ")";
 		//busco las url de las imagenes 
 		$url_images = ProductData::getUrlImages($idimagenes);
+		//busco el nombre de la primera imagen
+		$imgppal = ProductData::getImagePrincipal($idproduct);
+		$nombrefoto = $imgppal[0]->image;
+
+		//borro los registros
+		$product->delImages($idimagenes);
+		
 		//borro las imagenes
 		foreach ($url_images as $url_image ) {
+
+			if ($nombrefoto == $url_image->image_name) {
+				# code...
+				$sql = "SELECT COUNT(id) AS total FROM images WHERE id_product=2037";
+				$query = Executor::doit($sql);
+				$total =  Model::many($query[0],new ProductData());
+				$cantidad = $total[0]->total;
+				unlink('storage/products/'.$url_image->image_name);
+				if ($cantidad == 0) {
+					# code...
+					$sql = "update product set image ='no_image.png' where id=$idproduct";
+					Executor::doit($sql);
+				}else{
+					$sql = "SELECT image_name as img_name FROM images WHERE id_product = $idproduct ORDER BY id DESC LIMIT 1";
+					$query = Executor::doit($sql);
+					$nueva_ppal_image = Model::many($query[0],new ProductData());
+					$sql_upd = "update product set image ='".$nueva_ppal_image[0]->img_name."' where id=$idproduct";
+					Executor::doit($sql_upd);
+				}
+			}
 			# code...
 			unlink('storage/products/'.$url_image->image_name);
 		}
-		//borro los registros
-		$product->delImages($idimagenes);
+
 	}
 
 	$is_active=0;
@@ -94,7 +120,7 @@ if(count($_POST)>0){
                         //echo $handle->file_src_name;
                       $product->image = $handle->file_src_name;
                       $fileName = $handle->file_src_name;
-                      $product->update_images_product($fileName , $idproduct);
+                      $product->add_images_product($fileName , $idproduct);
 
                       } else {
                         echo 'Error: ' . $handle->error;

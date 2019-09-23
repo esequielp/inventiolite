@@ -45,7 +45,6 @@ $files = array();
       $inserted_product = $product->add();
       $idproduct = $inserted_product[1];
 
-      $primerafoto = 1 ;
       foreach ($files as $file) {
         $handle = new Upload($file);
 
@@ -64,8 +63,7 @@ $files = array();
                         //echo $handle->file_src_name;
                       $product->image = $handle->file_src_name;
                       $fileName = $handle->file_src_name;
-                      $product->add_images_product($fileName , $idproduct,$primerafoto );
-                      $primerafoto++;
+                      $product->add_images_product($fileName , $idproduct);
                       } else {
                         echo 'Error: ' . $handle->error;
                       }

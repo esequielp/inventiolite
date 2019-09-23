@@ -46,19 +46,26 @@ class ProductData {
 
 	}
 	//guardar imagenes
-	public function add_images_product($fileName, $idproduct,$primerafoto){
+	public function add_images_product($fileName, $idproduct){
 		
 		$sql = "insert into images (image_name,id_product,created_at) ";
 		$sql .= "value (\"$fileName\",$idproduct,NOW() )";
-		
-		if ($primerafoto ==1) {
-			# code...
+		//consulto si tiene imagen principal
+		$imgppal = ProductData::getImagePrincipal($idproduct);
+		$nombrefoto = $imgppal[0]->image;
+		if ($nombrefoto == 'no_image.png') {
 			$sql_foto_principal = "update ".self::$tablename." set image=\"$fileName\"  where id=$idproduct";
 			Executor::doit($sql_foto_principal);
 		}
 		//echo $sql;
 		//exit;		
 		return Executor::doit($sql);
+	}
+	//Get imagen principal
+	public static function getImagePrincipal($idproduct){
+		$sql = "select image from ".self::$tablename."  where id=$idproduct";
+		$query = Executor::doit($sql);
+		return Model::many($query[0],new ProductData());
 	}
 
 
@@ -168,6 +175,24 @@ class ProductData {
 		return Model::many($query[0],new ProductData());
 	}
 
+	public static function getCountAlertStock(){
+	$sql = "select 	count(P.id) as total 
+			FROM
+			operation AS Op 
+			RIGHT OUTER JOIN product AS P ON (Op.product_id = P.id) 
+			LEFT OUTER JOIN  operation_type AS Opt ON (Op.operation_type_id = Opt.id) 
+			INNER JOIN category AS C ON (P.category_id = C.id)
+			WHERE  (CASE
+			WHEN Opt.name  = 'entrada'
+			THEN 'Entrada'
+			WHEN Opt.name  IS NULL
+			THEN 'Nuevo'
+			END) <>'salida' ";
+		$query = Executor::doit($sql);
+		return Model::many($query[0],new ProductData());
+	}
+
+
 	public static function getAllActive(){
 		$sql = "select * from ".self::$tablename." where is_active=1" ;
 		$query = Executor::doit($sql);
@@ -260,14 +285,15 @@ class ProductData {
 	
 	    if ($product->id > $idpdt){
 		$idprod = $product->id;
-			$sql2 .= "('Reloj-Inteligente-Smart-Watch-V8-Dorado-Dz09-1.jpg',$idprod),"	;
+			$sql2 .= "('Reloj-Inteligente-Smart-Watch-dz09-Negro-V8-1.jpg',$idprod),"	;
 		
 		}
 	endforeach;
 
 	$sqlall = $sql . $sql2 ;
 	$sql_final = substr($sqlall, 0, -1);
-	//echo $sql_final;
+	echo $sql_final;
+	//exit;
 	Executor::doit($sql_final);	
 	}
 

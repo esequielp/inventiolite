@@ -24,7 +24,7 @@ if($product!=null):
         $imagenes = ProductData::getImagesProduct($product->id);
         foreach($imagenes as $image):?>
           <div class="col-xs-3 col-sm-4cols">
-          <div class="thumbnail profile-pic" id="imagen_producto">
+          <div class="thumbnail profile-pic" >
             <a href="#" title="Eliminar"  > <img class="img-responsive" title="<?php echo $product->name; ?>" src="storage/products/<?php echo $image->image_name;?>" ></a>
             <div class="edit del_img" id="<?php echo $image->id; ?>">
               <a href="#" title="Eliminar"><i class="fa fa-trash fa-lg"></i>

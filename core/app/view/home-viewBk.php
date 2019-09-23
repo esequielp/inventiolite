@@ -1,5 +1,13 @@
-<?php
-   $productsAlertStockTotal = ProductData::getCountAlertStock();
+	<?php
+  $found=true;
+  $products = ProductData::getAll();
+  foreach($products as $product){
+   $q=OperationData::getQYesF($product->id);	
+   if($q<=$product->inventary_min){
+    $found=true;
+    break;
+  }
+}
 ?>
 
 <div class="row">
@@ -79,35 +87,50 @@
 
 </div>
 
-<?php if($productsAlertStockTotal[0]->total>0){?>
+<?php if(count($products)>0){?>
 
 
 <div class="Responsive">
 
-  <table class="table table-bordered table-hover table-responsive-sm datatableHome"  width="100%"  >
-   <thead>
-    <th >id.</th>
-    <th >Cod.</th>
-    <th>Producto</th>
-    <th>Inv Min</th>
-    <th>Cant</th>
+<table class="table table-bordered table-hover table-responsive-sm datatable"  width="100%"  >
+	<thead>
+		<th >Cod.</th>
+		<th>Producto</th>
+		<th>Cant</th>
     <th>Categoria</th>
-    <th>Status</th>
-    <th>Accion</th>
-  </thead>
-  <tfoot>
-    <tr>
-    <th >id.</th>
-    <th >Cod.</th>
-    <th>Producto</th>
-    <th>Inv Min</th>
-    <th>Cant</th>
-    <th>Categoria</th>
-    <th>Status</th>
-    <th>Accion</th>
-    </tr>
-  </tfoot>
+    <th>Stock</th>
+	</thead>
+	<?php
+foreach($products as $product):
+	$q=OperationData::getQYesF($product->id);
+	?>
+	<?php if($q<=$product->inventary_min):?>
+	<tr class="<?php if($q==0){ echo "danger"; }else if($q<=$product->inventary_min/2){ echo "danger"; } else if($q<=$product->inventary_min){ echo "warning"; } ?>">
+		<td><?php echo $product->id;  ?></td>
+		<td><?php echo $product->name; ?></td>
+    <td><?php echo $q; ?></td>
+    <td><?php 
 
+    $categories = CategoryData::getById($product->category_id);
+    echo  $category = $categories->name;
+    ?></td>
+		<td style="width:93px;">
+		<?php if($q==0){ echo "<span class='label label-danger'><i class='glyphicon glyphicon-minus-sign'></i> Sin Stock.</span>";
+       echo "<a href='index.php?view=input&product_id=$product->id' class='btn btn-xs btn-primary'><i class='glyphicon glyphicon-circle-arrow-up'></i> Alta</a>";
+
+  }else if($q<=$product->inventary_min/2){ echo "<span class='label label-danger'>Muy bajo Stock.</span>";
+       echo "<a href='index.php?view=input&product_id=$product->id' class='btn btn-xs btn-primary'><i class='glyphicon glyphicon-circle-arrow-up'></i> Alta</a>";
+
+} else if($q<=$product->inventary_min){ echo "<span class='label label-warning'>Poco stock.</span>";
+       echo "<a href='index.php?view=input&product_id=$product->id' class='btn btn-xs btn-primary'><i class='glyphicon glyphicon-circle-arrow-up'></i> Alta</a>";
+
+} ?>
+		</td>
+	</tr>
+<?php endif;?>
+<?php
+endforeach;
+?>
 </table>
 </div>
 
@@ -118,12 +141,12 @@
 	?>
 	<div class="jumbotron">
 		<h2>No hay alertas</h2>
-		<p >Por el momento no hay alertas de inventario, estas se muestran cuando el inventario ha alcanzado el nivel mínimo.</p>
+		<p>Por el momento no hay alertas de inventario, estas se muestran cuando el inventario ha alcanzado el nivel minimo.</p>
 	</div>
 	<?php
 }
 
 ?>
-<br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br>
 	
 </div>

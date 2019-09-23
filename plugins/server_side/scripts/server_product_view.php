@@ -28,15 +28,38 @@ $primaryKey = 'id';
 // The `db` parameter represents the column name in the database, while the `dt`
 // parameter represents the DataTables column identifier. In this case simple
 // indexes
+
+// BUSCO URL DE LAS IMAGENES
+function getUrlImages($idproduct,$nombre_product){
+
+/*include("../../../core/controller/Database.php");
+$base = new Database();
+$con = $base->connect();*/
+$contenedor ="";
+$con = new mysqli("localhost","root","","inventiolite");
+$sql = "select image_name from images where id_product='" . $idproduct . "'";
+$query = $con->query($sql);
+$contenedor_inicio = '<div class="hidden" id="img-repo">';
+while($imagen = $query->fetch_array()){
+	$contenedor .= '<div class="item" id="image-' . $idproduct . '">
+						<img class="img-responsive" title="' . $nombre_product . '" src="storage/products/' . $imagen["image_name"] . '">
+					</div>';
+}
+$contenedor = $contenedor_inicio . $contenedor .  '</div>';
+	return $contenedor;
+}
+//SE DEFINEN COLUMNAS
 $columns = array(
 	array( 'db' => '`p`.`image`', 'dt' => 0, 'field' => 'image', 'formatter' => function( $d, $row ) {
-		return '<a href="#" title="Galeria"><img class="thumbnail img-responsive" id="' . $row["id"] . '" src="storage/products/'.$d.'"  style="width:64px;" ></a>';
+			$images_gallery = '<a href="#" title="Galeria"><img class="thumbnail img-responsive" id="image-' . $row["id"] . '" src="storage/products/'.$d.'"  style="width:64px;" ></a>';
+			$idproduct = $row["id"];
+			$nombre_product = $row[2];
+			return $images_gallery . getUrlImages($idproduct,$nombre_product);
 	}),
 	array( 'db' => '`p`.`barcode`', 'dt' => 1, 'field' => 'barcode', 'formatter' => function( $d, $row ) {
 				$buttons='<a title="Editar" href="index.php?view=editproduct&id=' . $row["id"] . '" class="btn btn-xs btn-warning">' . $row["barcode"] . ' </a>';
                 return $buttons;
 	}),		
-
 	array( 'db' => '`p`.`name`',     'dt' => 2, 'field' => 'product_name', 'as' => 'product_name' ),
 	array( 'db' => '`p`.`description`',   'dt' => 3, 'field' => 'description' ),
 	array( 'db' => '`p`.`attribute`',   'dt' => 4, 'field' => 'attribute' ),
@@ -78,7 +101,11 @@ $columns = array(
 	}),	
 );
 
-// SQL server connection information
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * If you just want to use the basic configuration for DataTables with PHP
+ * server-side, there is no need to edit below this line.
+ */
 require('config.php');
 $sql_details = array(
 	'user' => $db_username,
@@ -86,14 +113,9 @@ $sql_details = array(
 	'db'   => $db_name,
 	'host' => $db_host
 );
-
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * If you just want to use the basic configuration for DataTables with PHP
- * server-side, there is no need to edit below this line.
- */
-
 // require( 'ssp.class.php' );
 require('ssp.customized.class.php' );
+
 
 $joinQuery = "FROM `product` AS `p` JOIN `category` AS `c` ON (`p`.`category_id` = `c`.`id`)";
 //$extraWhere = "`u`.`salary` >= 90000";

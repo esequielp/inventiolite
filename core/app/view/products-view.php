@@ -1,8 +1,8 @@
 <?php
+//ini_set("display_errors", 1);
 $divisas = DivisaData::getAll();
-
-//$insertProduct = ProductData::addTestData(1000);	
-//$insertImage = ProductData::addImageData();
+//$insertProduct = ProductData::addTestData(50000);
+//$insertImage = ProductData::addImageData(2049);
 
 //ulmito valor del dolar  
 $ultimo_elemento=count($divisas)-1; 
@@ -78,16 +78,7 @@ if(count($products)>0){
 	</table>
 </div>
 </div>
-
- 				<div class="hidden" id="img-repo">
-			
-				<div class="item" id="256">
-					<img class="thumbnail img-responsive" title="NOMBRE PRODCUTO" src="storage/products/Reloj-Inteligente-Smart-Watch-V8-Dorado-Dz09-1.jpg" >
-				</div>
-			
-			</div>
-
-
+ 
 <div class="clearfix"></div>
 
 	<?php

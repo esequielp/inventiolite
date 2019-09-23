@@ -17,34 +17,11 @@
   <link rel="stylesheet" href="plugins/select2/dist/css/select2.min.css">
   <link rel="stylesheet" href="plugins/Datatables/dataTables.css">
   <link rel="stylesheet" type="text/css" href="plugins/Datatables/Buttons-1.5.6/css/buttons.dataTables.min.css">
-
-
- <!--  <link rel="apple-touch-icon" sizes="57x57" href="plugins/dist/img/favinico/apple-icon-57x57.png">
-  <link rel="apple-touch-icon" sizes="60x60" href="plugins/dist/img/favinico/apple-icon-60x60.png">
-  <link rel="apple-touch-icon" sizes="72x72" href="plugins/dist/img/favinico/apple-icon-72x72.png">
-  <link rel="apple-touch-icon" sizes="76x76" href="plugins/dist/img/favinico/apple-icon-76x76.png">
-  <link rel="apple-touch-icon" sizes="114x114" href="plugins/dist/img/favinico/apple-icon-114x114.png">
-  <link rel="apple-touch-icon" sizes="120x120" href="plugins/dist/img/favinico/apple-icon-120x120.png">
-  <link rel="apple-touch-icon" sizes="144x144" href="plugins/dist/img/favinico/apple-icon-144x144.png">
-  <link rel="apple-touch-icon" sizes="152x152" href="plugins/dist/img/favinico/apple-icon-152x152.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="plugins/dist/img/favinico/apple-icon-180x180.png">
-  <link rel="icon" type="image/png" sizes="192x192"  href="plugins/dist/img/favinico/android-icon-192x192.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="plugins/dist/img/favinico/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="96x96" href="plugins/dist/img/favinico/favicon-96x96.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="plugins/dist/img/favinico/favicon-16x16.png">
-  <link rel="manifest" href="plugins/dist/img/favinico/manifest.json">
-  <meta name="msapplication-TileColor" content="#ffffff">
-  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
-  <meta name="theme-color" content="#ffffff">   -->
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
 <!-- jQuery 3.4.1 -->
 <!-- Bootstrap 3.3.2 JS -->
-<script type="text/javascript" language="javascript" src="plugins/jquery/jquery-3.3.1.js"></script>
+<script src="plugins/jquery/jquery-2.2.4.min.js"></script>
+<script src="plugins/modernizr/2.8.3/modernizr.js"></script>
+
 <script type="text/javascript" language="javascript" src="plugins/jquery/jquery.dataTables.min.js"></script>
 
 <script type="text/javascript" language="javascript" src="plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
@@ -79,7 +56,8 @@
 </head>
 
 <body class="<?php if(isset($_SESSION["user_id"]) || isset($_SESSION["client_id"])):?>  skin-blue-light sidebar-mini <?php else:?>login-page<?php endif; ?>" >
-  <div class="wrapper">
+ <div class="se-pre-con"></div>
+ <div class="wrapper">
     <!-- Main Header -->
     <?php if(isset($_SESSION["user_id"]) || isset($_SESSION["client_id"])):?>
 <header class="main-header">
