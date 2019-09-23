@@ -4,8 +4,11 @@
 $products = ProductData::getLike($_GET["product"]);
 if(count($products)>0){
 	?>
+<br>
 <h3>Resultados de la Busqueda</h3>
-<table class="table table-bordered table-hover">
+<div class="row">
+<div class="col-md-12 col-sm-8 col-ms-6 col-xs-12">
+<table class="table table-bordered table-hover table-sm datatable"  width="100%"  >
 	<thead>
 		<th>Codigo</th>
 		<th>Nombre</th>
@@ -30,18 +33,20 @@ $q= OperationData::getQYesF($product->id);
 		<td>
 			<?php echo $q; ?>
 		</td>
-		<td style="width:250px;"><form method="post" action="index.php?view=addtocart">
-		<input type="hidden" name="product_id" value="<?php echo $product->id; ?>">
+		<td style="width:250px;">
+		<form method="post" action="index.php?view=addtocart">
+			<input type="hidden" name="product_id" value="<?php echo $product->id; ?>">
 
-<div class="input-group">
-		<input type="" class="form-control" required name="q" placeholder="Cantidad ...">
-      <span class="input-group-btn">
-		<button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-plus-sign"></i> Agregar</button>
-      </span>
-    </div>
+		<div class="input-group">
+			<input type="" class="form-control" required name="q" placeholder="Cantidad ...">
+      		<span class="input-group-btn">
+				<button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-plus-sign"></i> Agregar</button>
+      		</span>
+    	</div>
 
 
-		</form></td>
+		</form>
+	</td>
 	</tr>
 	
 <?php else:$products_in_cero++;
@@ -49,6 +54,8 @@ $q= OperationData::getQYesF($product->id);
 <?php  endif; ?>
 	<?php endforeach;?>
 </table>
+</div>
+</div>
 <?php if($products_in_cero>0){ echo "<p class='alert alert-warning'>Se omitieron <b>$products_in_cero productos</b> que no tienen existencias en el inventario. <a href='index.php?module=inventary'>Ir al Inventario</a></p>"; }?>
 
 	<?php

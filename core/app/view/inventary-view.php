@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-md-12 col-sm-6 col-ms-6 col-xs-12">
-			<h3><i class="glyphicon glyphicon-stats"></i> Inventario de Productos</h3>		
+			<h2><i class="glyphicon glyphicon-stats"></i> Inventario de Productos</h2>		
 	</div>
 </div>
 <div class="clearfix"></div>

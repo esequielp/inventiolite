@@ -213,7 +213,7 @@ class ProductData {
 
 
 	public static function getLike($p){
-		$sql = "select * from ".self::$tablename." where barcode like '%$p%' or name like '%$p%' or id like '%$p%'";
+		$sql = "select * from ".self::$tablename." where UPPER(barcode) like UPPER('%$p%') or UPPER(name) like UPPER('%$p%') or id like '%$p%'";
 		$query = Executor::doit($sql);
 		return Model::many($query[0],new ProductData());
 	}

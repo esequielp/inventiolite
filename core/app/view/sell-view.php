@@ -14,6 +14,8 @@
 		</div>
 		</form>
 	</div>
+</div>
+<div class="se-pre-con"></div>	
 <div id="show_search_results"></div>
 <script>
 //jQuery.noConflict();
@@ -22,9 +24,12 @@ $(document).ready(function(){
 	$("#searchp").on("submit",function(e){
 		e.preventDefault();
 		
+		$(".se-pre-con").show();	
 		$.get("./?action=searchproduct",$("#searchp").serialize(),function(data){
 			$("#show_search_results").html(data);
+			$(".se-pre-con").hide();
 		});
+		
 		$("#product_code").val("");
 
 	});
@@ -44,7 +49,10 @@ $(document).ready(function(){
 <?php if(isset($_SESSION["errors"])):?>
 <h2>Errores</h2>
 <p></p>
-<table class="table table-bordered table-hover">
+
+<div class="row">
+<div class="col-md-12 col-sm-8 col-ms-6 col-xs-12">
+<table class="table table-bordered table-hover table-sm datatable"  width="100%"  >
 <tr class="danger">
 	<th>Codigo</th>
 	<th>Producto</th>
@@ -61,6 +69,8 @@ $product = ProductData::getById($error["product_id"]);
 
 <?php endforeach; ?>
 </table>
+</div>
+</div>
 <?php
 unset($_SESSION["errors"]);
  endif; ?>
