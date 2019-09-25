@@ -55,20 +55,11 @@ class DivisaData {
 
 
 
-	public static function getAll(){
-		$sql = "select * from ".self::$tablename;
+	public static function getLast(){
+		$sql = "select * from ".self::$tablename ." ORDER BY created_at DESC LIMIT 1";
 		$query = Executor::doit($sql);
-		$array = array();
-		$cnt = 0;
-		while($r = $query[0]->fetch_array()){
-			$array[$cnt] = new DivisaData();
-			$array[$cnt]->id = $r['id'];
-			$array[$cnt]->monto = $r['monto'];
-			$array[$cnt]->fuente = $r['fuente'];
-			$array[$cnt]->created_at = $r['created_at'];
-			$cnt++;
-		}
-		return $array;
+		return Model::many($query[0],new DivisaData());
+
 	}
 
 

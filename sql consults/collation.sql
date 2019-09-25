@@ -1,8 +1,12 @@
 
-SELECT * FROM PRODUCT WHERE NAME LIKE "%pro%"
+SELECT * FROM PRODUCT WHERE UPPER(NAME) LIKE UPPER("%ño%")
 
 SHOW VARIABLES LIKE '%collation%';
 
+
+
+GRANT ALL PRIVILEGES ON inventiolite. * TO 'root'@'localhost';
+FLUSH PRIVILEGES;
 
 -- Change database collation
 ALTER DATABASE `inventiolite` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;

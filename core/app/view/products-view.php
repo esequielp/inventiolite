@@ -1,17 +1,18 @@
 <?php
 //ini_set("display_errors", 1);
-$divisas = DivisaData::getAll();
+$divisas = DivisaData::getLast();
+$valor_dolar = $divisas[0]->monto;
+$fecha = $divisas[0]->created_at;
 //$insertProduct = ProductData::addTestData(50000);
 //$insertImage = ProductData::addImageData(2049);
 
 //ulmito valor del dolar  
-$ultimo_elemento=count($divisas)-1; 
-$valor_dolar = ($divisas[$ultimo_elemento]->monto);
 ?>
 <div class="row">
 <div class="col-md-12 col-sm-6 col-ms-6 col-xs-12">
 <h2 >Lista de Productos</h2>
-	<h5>Precio del Dolar : <?php echo number_format($valor_dolar,2,'.',','); ?></h5>
+	<h5><b>Precio del Dolar :</b> <?php echo number_format($valor_dolar,2,'.',','); ?></h5>
+	<h5><b>Fecha :</b> <?php echo date( 'd/m/Y', strtotime($fecha)); ?></h5>
 </div>
 </div>
 <div class="row">
