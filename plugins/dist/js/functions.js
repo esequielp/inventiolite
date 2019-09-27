@@ -182,14 +182,26 @@ $('.datatableHome').DataTable( {
     responsive: true,
     "processing": true,
     "serverSide": true,
-    "ajax": "http://localhost/inventio-lite-master/plugins/server_side/scripts/server_home_view.php"
+    "ajax": "http://localhost/inventio-lite-master/plugins/server_side/scripts/server_home_view.php",
+      "rowCallback": function( row, data, index ) {
+      
+        var sinStock = data[6] ;
+
+        if ( sinStock  == 'Sin Stock')
+        {
+          $('td', row).addClass('danger');
+        }
+        else
+        {
+          $('td', row).addClass('warning');
+        }
+      }
        
     //"ajax:":dataSet
    /* orderCellsTop: true,
     fixedHeader: true*/
     /* "order": [[ 1, "asc" ]]*/
 } );
-
 //TABLE PRODUCTS VIEW
 $('.datatableProducts').DataTable( {
     "language": {
@@ -260,47 +272,9 @@ $('.datatableProducts').DataTable( {
     fixedHeader: true*/
     /* "order": [[ 1, "asc" ]]*/
 } );
-/* activate the carousel */
-$("#modal-carousel").carousel({interval:false});
-
-/* change modal title when slide changes */
-$("#modal-carousel").on("slid.bs.carousel", function (e) {
-  e.preventDefault();
-  e.stopPropagation();
-   var repo = $("#img-repo .item");
-    var repoCopy = repo.filter("#" + id).clone();
-    var active = repoCopy.first();
-
-    active.addClass("active");
-  $(".modal-title").html($(this).find(".active img").attr("title"));
-})
-
-   //FUNCION QUE MUESTRA EL MODAL CON LAS IMAGENES
-  //$(".row .thumbnail").click(function(){
-  $(document).on("click",".thumbnail", function (e) {
-    e.preventDefault();
-    e.stopPropagation();
-
-    var id = $(this).attr('id');
-    //alert(id);
-    var content = $(".carousel-inner");
-    var title = $(".modal-title");
-    content.empty();  
-    title.empty();
-    var repo = $("#img-repo .item");
-    var repoCopy = repo.filter("#" + id).clone();
-    var active = repoCopy.first();
-
-    active.addClass("active");
-    title.html(active.find("img").attr("title"));
-    content.append(repoCopy);
-
-    // show the modal
-    $("#modal-gallery").modal("show");
-  });
 
 //OCULTAR CAMPOS DE TABLE PRODUCTS 
-$('.datatableProducts .top').append('<b>Ocultar columnas</b>: <a class="toggle-vis" data-column="3">Descripcion</a> - <a class="toggle-vis" data-column="4">Atributos</a> - <a class="toggle-vis" data-column="5">Categoria</a> - <a class="toggle-vis" data-column="6">Costo($)</a> - <a class="toggle-vis" data-column="7">P-Venta($)</a> - <a class="toggle-vis" data-column="8">P-Venta(Bs)</a>');
+$('.top').append('<b>Ocultar columnas</b>: <a class="toggle-vis" data-column="3">Descripcion</a> - <a class="toggle-vis" data-column="4">Atributos</a> - <a class="toggle-vis" data-column="5">Categoria</a> - <a class="toggle-vis" data-column="6">Costo($)</a> - <a class="toggle-vis" data-column="7">P-Venta($)</a> - <a class="toggle-vis" data-column="8">P-Venta(Bs)</a>');
 
  $('a.toggle-vis').on( 'click', function (e) {
         e.preventDefault();
@@ -337,6 +311,138 @@ $('.datatableProducts .top').append('<b>Ocultar columnas</b>: <a class="toggle-v
             }
         } );
     } );
+
+
+/* activate the carousel */
+$("#modal-carousel").carousel({interval:false});
+
+/* change modal title when slide changes */
+$("#modal-carousel").on("slid.bs.carousel", function (e) {
+  e.preventDefault();
+  e.stopPropagation();
+   var repo = $("#img-repo .item");
+    var repoCopy = repo.filter("#" + id).clone();
+    var active = repoCopy.first();
+
+    active.addClass("active");
+  $(".modal-title").html($(this).find(".active img").attr("title"));
+})
+
+//TABLE INVENTARY VIEW
+$('.datatableInventary').DataTable( {
+    "language": {
+    "sProcessing":    "Procesando...",
+    "sLengthMenu":    "Mostrar _MENU_ registros",
+    "sZeroRecords":   "No se encontraron resultados",
+    "sEmptyTable":    "Ningún dato disponible en esta tabla",
+    "sInfo":          "Mostrando registros del _START_ al _END_ total de _TOTAL_ registros",
+    "sInfoEmpty":     "Mostrando registros del 0 al 0 total de 0 registros",
+    "sInfoFiltered":  "(filtrado de un total de _MAX_ registros)",
+    "sInfoPostFix":   "",
+    "sSearch":        "Buscar:",
+    "sUrl":           "",
+    "sInfoThousands":  ",",
+    "sLoadingRecords": "Cargando...",
+      "oPaginate": {
+          "sFirst":    "Primero",
+          "sLast":    "Último",
+          "sNext":    "Siguiente",
+          "sPrevious": "Anterior"
+      },
+      "oAria": {
+          "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+          "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+      }
+    },
+    "iDisplayLength": 5,
+    "aLengthMenu": [[5,
+    10, 50,100, -1], [5, 10, 50,100, "All"]],
+/*     "columnDefs": [
+      { "width": "10%", "targets": [2,3] }
+    ],*/
+    "columnDefs": [
+            {
+                "targets": [ 5 ],
+                "visible": false
+            }],
+    "search": {
+      "caseInsensitive": false
+    },
+    //"order": [[ , "desc" ]],
+     //dom: 'Blfrtip',
+    "dom": '<"top"Bf>rt<"bottom"lip><"clear">',
+    buttons: [
+            {
+                extend:    'copyHtml5',
+                text:      '<i class="fa fa-files-o"></i>',
+                titleAttr: 'Copy'
+            },
+            {
+                extend:    'excelHtml5',
+                text:      '<i class="fa fa-file-excel-o"></i>',
+                titleAttr: 'Excel'
+            },
+            {
+                extend:    'csvHtml5',
+                text:      '<i class="fa fa-file-text-o"></i>',
+                titleAttr: 'CSV'
+            },
+            {
+                extend:    'pdfHtml5',
+                text:      '<i class="fa fa-file-pdf-o"></i>',
+                titleAttr: 'PDF'
+            }
+      ],
+    responsive: true,
+    "processing": true,
+    "serverSide": true,
+    "ajax": "http://localhost/inventio-lite-master/plugins/server_side/scripts/server_inventary_view.php",
+      "rowCallback": function( row, data, index ) {
+      
+        var sinStock = data[5] ;
+
+        if ( sinStock  == 'Sin Stock')
+        {
+          $('td', row).addClass('danger');
+        }
+        else
+        {
+          $('td', row).addClass('warning');
+        }
+      }
+       
+    //"ajax:":dataSet
+   /* orderCellsTop: true,
+    fixedHeader: true*/
+    /* "order": [[ 1, "asc" ]]*/
+} );
+
+
+
+   //FUNCION QUE MUESTRA EL MODAL CON LAS IMAGENES
+  //$(".row .thumbnail").click(function(){
+  $(document).on("click",".thumbnail", function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    var id = $(this).attr('id');
+    //alert(id);
+    var content = $(".carousel-inner");
+    var title = $(".modal-title");
+    content.empty();  
+    title.empty();
+    var repo = $("#img-repo .item");
+    var repoCopy = repo.filter("#" + id).clone();
+    var active = repoCopy.first();
+
+    active.addClass("active");
+    title.html(active.find("img").attr("title"));
+    content.append(repoCopy);
+
+    // show the modal
+    $("#modal-gallery").modal("show");
+  });
+
 
 //FUNCION DUPLICA LA FILA VISTA TABLA PRODCUTOS 
 //$('.datatableProducts').on('click','img',function(){ 

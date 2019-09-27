@@ -12,7 +12,7 @@ if(count($products)>0){
 
 	?>
 <br>
-<table class="table table-bordered table-hover	">
+<table class="table table-bordered table-hover datatable	">
 	<thead>
 		<th></th>
 		<th>Producto</th>

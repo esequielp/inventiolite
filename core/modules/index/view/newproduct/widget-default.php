@@ -89,16 +89,3 @@ $categories = CategoryData::getAll();
 
 	</div>
 </div>
-
-<script>
-  $(document).ready(function(){
-    $("#product_code").keydown(function(e){
-        if(e.which==17 || e.which==74 ){
-            e.preventDefault();
-        }else{
-            console.log(e.which);
-        }
-    })
-});
-
-</script>

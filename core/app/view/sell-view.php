@@ -47,15 +47,6 @@ $(document).ready(function(){
 	});
 	});
 
-$(document).ready(function(){
-    $("#product_code").keydown(function(e){
-        if(e.which==17 || e.which==74){
-            e.preventDefault();
-        }else{
-            console.log(e.which);
-        }
-    })
-});
 </script>
 
 <?php if(isset($_SESSION["errors"])):?>
@@ -74,7 +65,7 @@ $(document).ready(function(){
 $product = ProductData::getById($error["product_id"]);
 ?>
 <tr class="danger">
-	<td><?php echo $product->id; ?></td>
+	<td><?php echo $product->barcode; ?></td>
 	<td><?php echo $product->name; ?></td>
 	<td><b><?php echo $error["message"]; ?></b></td>
 </tr>
