@@ -118,10 +118,10 @@ require('ssp.customized.class.php' );
 
 
 $joinQuery = "FROM `product` AS `p` JOIN `category` AS `c` ON (`p`.`category_id` = `c`.`id`)";
-//$extraWhere = "`u`.`salary` >= 90000";
+$extraWhere = "`p`.`is_active` = 1";
 //$groupBy = "`u`.`office`";
 //$having = "`u`.`salary` >= 140000";
 //$extraWhere, $groupBy, $having
 echo json_encode(
-	SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns, $joinQuery )
+	SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns, $joinQuery, $extraWhere )
 );

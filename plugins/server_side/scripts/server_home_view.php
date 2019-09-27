@@ -94,7 +94,7 @@ $extraWhere = "(CASE
       THEN 'Entrada'
       WHEN Opt.name  IS NULL
       THEN 'Nuevo'
-    END) <>'salida'";
+    END) <>'salida' and P.is_active = 1";
 //$groupBy = "`u`.`office`";
 //$having = "`u`.`salary` >= 140000";
 //$extraWhere, $groupBy, $having
