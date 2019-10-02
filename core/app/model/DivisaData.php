@@ -1,4 +1,5 @@
 <?php
+//ini_set("display_errors", 1);
 class DivisaData {
 	public static $tablename = "divisa";
 
@@ -17,6 +18,7 @@ class DivisaData {
 		Executor::doit($sql);
 		//ACTUALIZO LOS PRECIOS DE LOS PRODUCTOS
 		$priceOut = ProductData::updatePriceOut($this->monto);
+		echo $priceOut;
 	}
 
 	public static function delById($id){
@@ -53,6 +55,12 @@ class DivisaData {
 		return $found;
 	}
 
+
+	public static function getAll(){
+		$sql = "select * from ".self::$tablename;
+		$query = Executor::doit($sql);
+		return Model::many($query[0],new ProductData());
+	}
 
 
 	public static function getLast(){

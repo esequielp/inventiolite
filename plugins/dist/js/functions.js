@@ -1,3 +1,9 @@
+function getAbsolutePath() {
+    var loc = window.location;
+    var pathName = loc.pathname.substring(0, loc.pathname.lastIndexOf('/') + 1);
+    return loc.href.substring(0, loc.href.length - ((loc.pathname + loc.search + loc.hash).length - pathName.length));
+}
+
 $(window).load(function() {
     // Animate loader off screen
     $(".se-pre-con").fadeOut();;
@@ -31,7 +37,8 @@ $( "#ShowDivisa" ).click(function() {
  $('.dropdown-toggle').dropdown();
 
 //Eliminar imagenes update product
-$( ".del_img" ).click(function() {
+$(document).on("click",".del_img", function () {
+//$( ".del_img" ).click(function() {
 
 //ELIMINAR IMAGEN VISTA EDITAR PRODUCTOS
 var txt;
@@ -54,6 +61,26 @@ if (r == true) {
 }
  
 });
+
+
+//Eliminar Divisas, etc
+$(document).on("click",".del_item", function () {
+//$( ".del_img" ).click(function() {
+
+
+var title = $(this).attr('title');
+
+//ELIMINAR IMAGEN VISTA EDITAR PRODUCTOS
+var txt;
+var r = confirm("Esta Seguro de eliminar esta " + title + " ?");
+if (r == true) {
+  return true;
+}else{
+  return false;  
+}
+ 
+});
+
 
 //Clase Datatabkes
 var table = $('.datatable').DataTable( {
@@ -85,6 +112,7 @@ var table = $('.datatable').DataTable( {
     "aLengthMenu": [[5,
     10, 50,100, -1], [5, 10, 50,100, "All"]],
    "dom": '<"top"Bf>rt<"bottom"lip><"clear">',
+   "order": [[ 0, "desc" ]],
     buttons: [
         {
             extend:    'copyHtml5',
@@ -112,8 +140,6 @@ var table = $('.datatable').DataTable( {
     fixedHeader: true*/
     /* "order": [[ 1, "asc" ]]*/
 } );
-
-
 //TABLE HOME PRODUCT ALERT STOCK
 $('.datatableHome').DataTable( {
     "language": {
@@ -182,7 +208,7 @@ $('.datatableHome').DataTable( {
     responsive: true,
     "processing": true,
     "serverSide": true,
-    "ajax": "http://localhost/inventio-lite-master/plugins/server_side/scripts/server_home_view.php",
+    "ajax": getAbsolutePath()+"/plugins/server_side/scripts/server_home_view.php",
       "rowCallback": function( row, data, index ) {
       
         var sinStock = data[6] ;
@@ -196,7 +222,6 @@ $('.datatableHome').DataTable( {
           $('td', row).addClass('warning');
         }
       }
-       
     //"ajax:":dataSet
    /* orderCellsTop: true,
     fixedHeader: true*/
@@ -265,7 +290,7 @@ $('.datatableProducts').DataTable( {
     responsive: true,
     "processing": true,
     "serverSide": true,
-    "ajax": "http://localhost/inventio-lite-master/plugins/server_side/scripts/server_product_view.php"
+    "ajax": getAbsolutePath()+"/plugins/server_side/scripts/server_product_view.php"
        
     //"ajax:":dataSet
    /* orderCellsTop: true,
@@ -274,7 +299,9 @@ $('.datatableProducts').DataTable( {
 } );
 
 //OCULTAR CAMPOS DE TABLE PRODUCTS 
-$('.top').append('<b>Ocultar columnas</b>: <a class="toggle-vis" data-column="3">Descripcion</a> - <a class="toggle-vis" data-column="4">Atributos</a> - <a class="toggle-vis" data-column="5">Categoria</a> - <a class="toggle-vis" data-column="6">Costo($)</a> - <a class="toggle-vis" data-column="7">P-Venta($)</a> - <a class="toggle-vis" data-column="8">P-Venta(Bs)</a>');
+
+//OJO ARREGLAR PARA QUE SOLO SALGA EN TABLE PRODUCTS VIEW
+//$('.top').append('<b>Ocultar columnas</b>: <a class="toggle-vis" data-column="3">Descripcion</a> - <a class="toggle-vis" data-column="4">Atributos</a> - <a class="toggle-vis" data-column="5">Categoria</a> - <a class="toggle-vis" data-column="6">Costo($)</a> - <a class="toggle-vis" data-column="7">P-Venta($)</a> - <a class="toggle-vis" data-column="8">P-Venta(Bs)</a>');
 
  $('a.toggle-vis').on( 'click', function (e) {
         e.preventDefault();
@@ -327,7 +354,6 @@ $("#modal-carousel").on("slid.bs.carousel", function (e) {
     active.addClass("active");
   $(".modal-title").html($(this).find(".active img").attr("title"));
 })
-
 //TABLE INVENTARY VIEW
 $('.datatableInventary').DataTable( {
     "language": {
@@ -396,7 +422,7 @@ $('.datatableInventary').DataTable( {
     responsive: true,
     "processing": true,
     "serverSide": true,
-    "ajax": "http://localhost/inventio-lite-master/plugins/server_side/scripts/server_inventary_view.php",
+    "ajax": getAbsolutePath()+"plugins/server_side/scripts/server_inventary_view.php",
       "rowCallback": function( row, data, index ) {
       
         var sinStock = data[5] ;
@@ -449,8 +475,7 @@ $('.datatableInventary').DataTable( {
 
 $(document).on("click",".clone", function () {
 
-        var x = location.host;
-        alert(x);
+
         var myTr = $(this).closest('tr');
         var clone = myTr.clone();
         myTr.after(clone);

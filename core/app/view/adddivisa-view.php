@@ -1,5 +1,5 @@
 <?php
-
+//ini_set("display_errors", 1);
 if(count($_POST)>0){
 	$divisa = new DivisaData();
 	$divisa->monto = $_POST["monto"];

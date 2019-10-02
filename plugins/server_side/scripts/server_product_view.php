@@ -95,7 +95,7 @@ $columns = array(
 	}),
 	array( 'db' => '`p`.`id`', 'dt' => 17, 'field' => 'id', 'formatter' => function( $d, $row ) {
 				$buttons='<a title="Editar" href="index.php?view=editproduct&id=' . $row["id"] . '" class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-pencil"></i></a>
-		<a title="Eliminar" href="index.php?view=delproduct&id=' . $row["id"] . '" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>
+		<a title="' . $row["product_name"] . '" href="index.php?view=delproduct&id=' . $row["id"] . '" class="btn btn-xs btn-danger del_item"><i class="fa fa-trash"></i></a>
 		<a title="Duplicar" class="btn btn-xs btn-info clone" id=' . $row["id"] . '"><i class="glyphicon glyphicon-file"></i></a>';
                 return $buttons;
 	}),	

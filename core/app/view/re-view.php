@@ -50,7 +50,7 @@ $q= OperationData::getQYesF($product->id);
 		</td>
 		<td>
 		<input type="hidden" name="product_id" value="<?php echo $product->id; ?>">
-		<input type="" class="form-control allownumericwithoutdecimal" required name="q" placeholder="Cantidad de producto ..."></td>
+		<input type="text" class="form-control allownumericwithoutdecimal" required name="q" placeholder="Cantidad de producto ..."></td>
 		<td style="width:100px;">
 		<button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-refresh"></i> Agregar</button>
 		</td>

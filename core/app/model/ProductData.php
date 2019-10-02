@@ -1,4 +1,5 @@
 <?php
+//ini_set("display_errors", 1);
 class ProductData {
 	public static $tablename = "product";
 
@@ -98,25 +99,40 @@ class ProductData {
 	}
 
 	public function updatePriceOut($price){
-		//	porcentaje de ganancia 
-		$configurations = ConfigurationData::getById(9);
-		$pg =  $configurations ->val;
-		$divisas = DivisaData::getAll();
-		//ultimo valor del dolar  
-		$ultimo_elemento=count($divisas)-1; 
-		$valor_dolar = ($divisas[$ultimo_elemento]->monto);
-
-
 		//busco los precios de los productos
 		$products = ProductData::getAllActive();	
-		
+
 		foreach($products as $product):
+
+		//porcentaje
+		$pg = $product->percentage;
+		//Valor del $
+		$valor_dolar = $price;
+		
+		//Precio costo en Bsf
+		$PrecioNeto = $product->price_in * $valor_dolar  ;
+		//Cantidad de Ganancia en Dolar
+		$PrecioGanciaDL = (($product->price_in * $pg) /100 )  + $product->price_in ;
+		//Cantidad Ganancia en Bs
+		$PrecioGanciaBs = ((($product->price_in * $pg) /100 ) * $valor_dolar ) ;
+		//Precio venta en dolar
+		$PrecioVentaDl = ((($product->price_in * $pg) /100 ) + $product->price_in )  ;	
+		//Precio Venta en Bolivares
+		$PrecioVentaBS = $PrecioNeto + $PrecioGanciaBs;
+
+
 		$finalPrice = ((($product->price_in * $pg) /100 ) + $product->price_in ) * $valor_dolar ;
 			//echo $finalPrice ."<br>";
 		//actualizo el precio salida
-		$sql = "update ".self::$tablename." set price_out=\"$finalPrice\" where id=".$product->id;
-		endforeach;	
+		
+
+		$sql = "update ".self::$tablename." set price_out=\"$PrecioVentaDl\",price_out_bs=\"$PrecioVentaBS\",gain_dl=\"$PrecioGanciaDL\",gain_bs=\"$PrecioGanciaBs\" where id=$product->id;";
+
 		Executor::doit($sql);
+		endforeach;
+		//echo $sql;
+		//exit;
+		
 	}
 
 	public function del_category(){
@@ -194,7 +210,7 @@ class ProductData {
 
 
 	public static function getAllActive(){
-		$sql = "select * from ".self::$tablename." where is_active=1" ;
+		$sql = "select * from ".self::$tablename." where is_active=1 and is_bsf=0" ;
 		$query = Executor::doit($sql);
 		return Model::many($query[0],new ProductData());
 	}	

@@ -23,7 +23,8 @@
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">
     <input type="hidden" name="divisa_id" value="<?php echo $divisa->id;?>">
-      <button type="submit" class="btn btn-primary">Actualizar Divisa</button>
+      <button type="submit" class="btn btn-primary">Actualizar Divisa</button> 
+      <a href="./?view=divisas" class="btn btn-danger">Cancelar</a>
     </div>
   </div>
 </form>

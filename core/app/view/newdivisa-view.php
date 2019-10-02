@@ -6,9 +6,9 @@
 
 
   <div class="form-group">
-    <label for="inputEmail1" class="col-lg-2 control-label">Monto*</label>
+    <label for="inputEmail1" class="col-lg-2 control-label ">Monto*</label>
     <div class="col-md-3">
-      <input type="text" name="monto" required class="form-control" id="monto" placeholder="Monto">
+      <input type="text" name="monto" required class="form-control allownumericwithdecimal" id="monto" placeholder="Monto (Ejm: 10000,00)">
     </div>
   </div>
  
