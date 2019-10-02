@@ -30,7 +30,7 @@ class ProductData {
 		//Precio costo en Bsf
 		$PrecioNeto = $this->price_in * $valor_dolar  ;
 		//Cantidad de Ganancia en Dolar
-		$PrecioGanciaDL = (($this->price_in * $pg) /100 )  + $product->price_in ;
+		$PrecioGanciaDL = (($this->price_in * $pg) /100 );
 		//Cantidad Ganancia en Bs
 		$PrecioGanciaBs = ((($this->price_in * $pg) /100 ) * $valor_dolar ) ;
 		//Precio venta en dolar
@@ -82,7 +82,7 @@ class ProductData {
 		//Precio costo en Bsf
 		$PrecioNeto = $this->price_in * $valor_dolar  ;
 		//Cantidad de Ganancia en Dolar
-		$PrecioGanciaDL = (($this->price_in * $pg) /100 )  + $product->price_in ;
+		$PrecioGanciaDL = (($this->price_in * $pg) /100 )  ;
 		//Cantidad Ganancia en Bs
 		$PrecioGanciaBs = ((($this->price_in * $pg) /100 ) * $valor_dolar ) ;
 		//Precio venta en dolar
@@ -112,7 +112,7 @@ class ProductData {
 		//Precio costo en Bsf
 		$PrecioNeto = $product->price_in * $valor_dolar  ;
 		//Cantidad de Ganancia en Dolar
-		$PrecioGanciaDL = (($product->price_in * $pg) /100 )  + $product->price_in ;
+		$PrecioGanciaDL = (($product->price_in * $pg) /100 )  ;
 		//Cantidad Ganancia en Bs
 		$PrecioGanciaBs = ((($product->price_in * $pg) /100 ) * $valor_dolar ) ;
 		//Precio venta en dolar

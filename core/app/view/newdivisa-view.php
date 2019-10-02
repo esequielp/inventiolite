@@ -22,6 +22,7 @@
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">
       <button type="submit" class="btn btn-primary">Agregar Divisa</button>
+    <a href="./?view=divisas" class="btn btn-danger">Cancelar</a>
     </div>
   </div>
 </form>
