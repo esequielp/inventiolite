@@ -39,8 +39,9 @@ $products_in_cero=0;
 	 foreach($products as $product):
 $q= OperationData::getQYesF($product->id);
 	?>
-		<form method="post" action="index.php?view=addtore">
+		
 	<tr class="<?php if($q<=$product->inventary_min){ echo "danger"; }?>">
+		<form method="post" action="index.php?view=addtore" id="addre"  role="form">
 		<td style="width:80px;"><?php echo $product->id; ?></td>
 		<td><?php echo $product->name; ?></td>
 		<td><?php echo $product->unit; ?></td>
@@ -54,8 +55,9 @@ $q= OperationData::getQYesF($product->id);
 		<td style="width:100px;">
 		<button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-refresh"></i> Agregar</button>
 		</td>
-	</tr>
 	</form>
+	</tr>
+	
 	<?php endforeach;?>
 </table>
 </div>
