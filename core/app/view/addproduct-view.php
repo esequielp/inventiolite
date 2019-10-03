@@ -11,6 +11,7 @@ if(count($_POST)>0){
   $product->description = ucfirst($_POST["description"]);
   $product->attribute = strtoupper($_POST["attribute"]);
   $product->presentation = $_POST["presentation"];
+  $product->location = $_POST["location"];
   //$product->inventary_min = $_POST["inventary_min"];
   $category_id="NULL";
   if($_POST["category_id"]!=""){ $category_id=$_POST["category_id"];}

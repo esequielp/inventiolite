@@ -17,6 +17,7 @@ if(count($_POST)>0){
 	$product->presentation = $_POST["presentation"];
 	$product->inventary_min = $_POST["inventary_min"];
 	$product->inventary_min = $_POST["images_id"];
+	$product->location = $_POST["location"];
 	
 	
 	$category_id="NULL";

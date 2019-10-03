@@ -50,6 +50,7 @@ if(count($products)>0){
 				<th>Presentacion</th>
 				<th>Minima</th>
 				<th>Status</th>
+				<th>Ubicación</th>
 				<th>Fecha</th>
 				<th>Accion</th>
 			</tr>
@@ -72,6 +73,7 @@ if(count($products)>0){
 				<th>Presentacion</th>
 				<th>Minima</th>
 				<th>Status</th>
+				<th>Ubicación</th>
 				<th>Fecha</th>
 				<th>Accion</th>
 			</tr>

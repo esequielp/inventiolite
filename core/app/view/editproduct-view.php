@@ -60,7 +60,12 @@ if($product!=null):
       <input type="text" name="attribute" class="form-control" id="attribute" value="<?php echo $product->attribute; ?>" placeholder="Marca-Modelo-Etc (Separar con - )">
     </div>
   </div> 
-
+    <div class="form-group">
+    <label for="inputEmail1" class="col-lg-3 control-label">Ubicación</label>
+    <div class="col-md-8">
+      <input type="text" name="location" class="form-control" id="location" value="<?php echo $product->location; ?>" placeholder="Ubicacion en almacen (Separar con - )">
+    </div>
+  </div> 
     <div class="form-group">
     <label for="inputEmail1" class="col-lg-3 control-label">Categoria</label>
     <div class="col-md-8">

@@ -48,6 +48,13 @@ $categories = CategoryData::getAll();
     </div>
   </div>
   <div class="form-group">
+    <label for="inputEmail1" class="col-lg-2 control-label">Ubicación</label>
+    <div class="col-md-6">
+      <textarea name="location" class="form-control" id="location" placeholder="Ubicacion en Almacen (Separar con - )"></textarea>
+    </div>
+  </div>
+
+  <div class="form-group">
     <label for="inputEmail1" class="col-lg-2 control-label">Precio de Entrada*</label>
     <div class="col-md-6">
       <input type="text" name="price_in" required class="form-control allownumericwithdecimal" id="price_in" placeholder="Precio de entrada(use . para los decimales)" maxlength="10">

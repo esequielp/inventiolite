@@ -262,7 +262,7 @@ $('.datatableProducts').DataTable( {
     "search": {
       "caseInsensitive": false
     },
-    "order": [[ 16, "desc" ]],
+    "order": [[ 17, "desc" ]],
      //dom: 'Blfrtip',
     "dom": '<"top"Bf>rt<"bottom"lip><"clear">',
     buttons: [

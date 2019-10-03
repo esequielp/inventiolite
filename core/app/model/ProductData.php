@@ -7,6 +7,7 @@ class ProductData {
 		$this->name = "";
 		$this->description = "";
 		$this->attribute = "";
+		$this->location = "";
 		$this->price_in = "";
 		$this->price_out = "";
 		$this->percentage = "";
@@ -38,8 +39,8 @@ class ProductData {
 		//Precio Venta en Bolivares
 		$PrecioVentaBS = $PrecioNeto + $PrecioGanciaBs;
 
-		$sql = "insert into ".self::$tablename." (barcode,name,description,attribute,price_in,price_out,price_out_bs,gain_dl,gain_bs,percentage,user_id,presentation,unit,category_id,inventary_min,is_bsf,created_at) ";
-		$sql .= "value (\"$this->barcode\",\"$this->name\",\"$this->description\",\"$this->attribute\",\"$this->price_in\",\"$PrecioVentaDl\",\"$PrecioVentaBS\",\"$PrecioGanciaDL\",\"$PrecioGanciaBs\",\"$this->percentage\",$this->user_id,\"$this->presentation\",\"$this->unit\",$this->category_id,$this->inventary_min,\"$this->is_bsf\",NOW())";
+		$sql = "insert into ".self::$tablename." (barcode,name,description,attribute,location,price_in,price_out,price_out_bs,gain_dl,gain_bs,percentage,user_id,presentation,unit,category_id,inventary_min,is_bsf,created_at) ";
+		$sql .= "value (\"$this->barcode\",\"$this->name\",\"$this->description\",\"$this->attribute\",\"$this->location\",\"$this->price_in\",\"$PrecioVentaDl\",\"$PrecioVentaBS\",\"$PrecioGanciaDL\",\"$PrecioGanciaBs\",\"$this->percentage\",$this->user_id,\"$this->presentation\",\"$this->unit\",$this->category_id,$this->inventary_min,\"$this->is_bsf\",NOW())";
 		
 		//echo $sql;
 		//exit;
@@ -90,7 +91,7 @@ class ProductData {
 		//Precio Venta en Bolivares
 		$PrecioVentaBS = $PrecioNeto + $PrecioGanciaBs;
 
-			$sql = "update ".self::$tablename." set barcode=\"$this->barcode\",name=\"$this->name\",description=\"$this->description\",attribute=\"$this->attribute\",price_in=\"$this->price_in\",price_out=\"$PrecioVentaDl\",price_out_bs=\"$PrecioVentaBS\",gain_dl=\"$PrecioGanciaDL\",gain_bs=\"$PrecioGanciaBs\",unit=\"$this->unit\",presentation=\"$this->presentation\",category_id=$this->category_id,inventary_min=\"$this->inventary_min\",is_active=\"$this->is_active\",is_bsf=\"$this->is_bsf\" where id=$this->id";
+			$sql = "update ".self::$tablename." set barcode=\"$this->barcode\",name=\"$this->name\",description=\"$this->description\",attribute=\"$this->attribute\",location=\"$this->location\",price_in=\"$this->price_in\",price_out=\"$PrecioVentaDl\",price_out_bs=\"$PrecioVentaBS\",gain_dl=\"$PrecioGanciaDL\",gain_bs=\"$PrecioGanciaBs\",unit=\"$this->unit\",presentation=\"$this->presentation\",category_id=$this->category_id,inventary_min=\"$this->inventary_min\",is_active=\"$this->is_active\",is_bsf=\"$this->is_bsf\" where id=$this->id";
 		
 		//echo $sql;
 		//exit;

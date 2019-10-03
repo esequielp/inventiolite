@@ -90,10 +90,11 @@ $columns = array(
 	array( 'db' => '`p`.`is_active`', 'dt' => 15, 'is_active' => 'image', 'formatter' => function( $d, $row ) {
 		return '<a title="Activar/Desactivar" href="index.php?view=editproduct&id=' . $row["id"] . '" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-ok"></i></a>';
 	}),
-	array( 'db' => '`p`.`created_at`', 'dt' => 16, 'field' => 'created_at', 'formatter' => function( $d, $row ) {
+	array( 'db' => '`p`.`location`',   'dt' => 16, 'field' => 'location' ),
+	array( 'db' => '`p`.`created_at`', 'dt' => 17, 'field' => 'created_at', 'formatter' => function( $d, $row ) {
 				return date( 'd/m/Y', strtotime($d));
 	}),
-	array( 'db' => '`p`.`id`', 'dt' => 17, 'field' => 'id', 'formatter' => function( $d, $row ) {
+	array( 'db' => '`p`.`id`', 'dt' => 18, 'field' => 'id', 'formatter' => function( $d, $row ) {
 				$buttons='<a title="Editar" href="index.php?view=editproduct&id=' . $row["id"] . '" class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-pencil"></i></a>
 		<a title="' . $row["product_name"] . '" href="index.php?view=delproduct&id=' . $row["id"] . '" class="btn btn-xs btn-danger del_item"><i class="fa fa-trash"></i></a>
 		<a title="Duplicar" class="btn btn-xs btn-info clone" id=' . $row["id"] . '"><i class="glyphicon glyphicon-file"></i></a>';
