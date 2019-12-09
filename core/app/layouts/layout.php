@@ -13,7 +13,7 @@
   <!-- Theme style -->
   <link href="plugins/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
   <link href="plugins/dist/css/skins/skin-blue-light.min.css" rel="stylesheet" type="text/css" />
-  <link href="plugins/dist/css/hovereffect.css" rel="stylesheet" type="text/css" />
+  <link href="plugins/dist/css/styles.css" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" href="plugins/select2/dist/css/select2.min.css">
   <link rel="stylesheet" href="plugins/Datatables/dataTables.css">
   <link rel="stylesheet" type="text/css" href="plugins/Datatables/Buttons-1.5.6/css/buttons.dataTables.min.css">
@@ -80,18 +80,18 @@
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
               <!-- Messages: style can be found in dropdown.less-->
-              <li class="dropdown messages-menu">
+<!--               <li class="dropdown messages-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <i class="fa fa-envelope-o"></i>
                   <span class="label label-success">4</span>
                 </a>
                 <ul class="dropdown-menu">
                   <li class="header">Tiene 4 mensajes</li>
-                  <li>
+                  <li> -->
                     <!-- inner menu: contains the actual data -->
-                    <ul class="menu">
-                      <li><!-- start message -->
-                        <a href="#">
+                    <!-- <ul class="menu">
+                      <li> --><!-- start message -->
+<!--                         <a href="#">
                           <div class="pull-left">
                             <img src="plugins/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                           </div>
@@ -101,24 +101,24 @@
                           </h4>
                           <p>Jose Reverón</p>
                         </a>
-                      </li><!-- end message -->
-                      ...
+                      </li> --><!-- end message -->
+<!--                       ...
                     </ul>
                   </li>
                   <li class="footer"><a href="#">Ver todos los mensajes</a></li>
                 </ul>
-              </li>
+              </li> -->
               <!-- Notifications: style can be found in dropdown.less -->
-              <li class="dropdown notifications-menu">
+<!--               <li class="dropdown notifications-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <i class="fa fa-bell-o"></i>
                   <span class="label label-warning">10</span>
                 </a>
                 <ul class="dropdown-menu">
                   <li class="header">Tiene 10 Alertas</li>
-                  <li>
+                  <li> -->
                     <!-- inner menu: contains the actual data -->
-                    <ul class="menu">
+<!--                     <ul class="menu">
                       <li>
                         <a href="#">
                           <i class="ion ion-ios-people info"></i> Productos sin Stock
@@ -129,20 +129,20 @@
                   </li>
                   <li class="footer"><a href="#">Ver Todas</a></li>
                 </ul>
-              </li>
+              </li> -->
               <!-- Tasks: style can be found in dropdown.less -->
-              <li class="dropdown tasks-menu">
+<!--               <li class="dropdown tasks-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <i class="fa fa-flag-o"></i>
                   <span class="label label-danger">9</span>
                 </a>
                 <ul class="dropdown-menu">
                   <li class="header">Tiene 9 tareas</li>
-                  <li>
+                  <li> -->
                     <!-- inner menu: contains the actual data -->
-                    <ul class="menu">
-                      <li><!-- Task item -->
-                        <a href="#">
+                    <!-- <ul class="menu">
+                      <li> --><!-- Task item -->
+ <!--                        <a href="#">
                           <h3>
                            Reabastecer Inventario
                             <small class="pull-right">20%</small>
@@ -153,15 +153,15 @@
                             </div>
                           </div>
                         </a>
-                      </li><!-- end task item -->
-                      ...
+                      </li> --><!-- end task item -->
+       <!--                ...
                     </ul>
                   </li>
                   <li class="footer">
                     <a href="#">Ver todas las tareas</a>
                   </li>
                 </ul>
-              </li>
+              </li> -->
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -186,7 +186,7 @@
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     <div class="pull-left">
-                      <a href="#" class="btn btn-default btn-flat">Perfil</a>
+                      <a href="index.php?view=edituser&id=<?php echo $_SESSION["user_id"];?>" class="btn btn-default btn-flat">Perfil</a>
                     </div>
                     <div class="pull-right">
                       <a href="./logout.php" class="btn btn-default btn-flat">Salir</a>
@@ -210,11 +210,11 @@
         <?php if(isset($_SESSION["user_id"])):?>
           <li><a href="./index.php?view=home"><i class='fa fa-home'></i> <span>Inicio</span></a></li>
           <li class="treeview">
-            <a href="#"><i class='fa fa-dashboard'></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i></a>
-            <ul class="treeview-menu">
+            <a href="#"><i class='fa fa-dashboard'></i> <span>Dashboard</span> <!-- <i class="fa fa-angle-left pull-right"></i> --></a>
+<!--             <ul class="treeview-menu">
               <li><a href="./index.php?view=dashboard1">Dashboard v1</a></li>
               <li><a href="./index.php?view=dashboard2">Dashboard v2</a></li>
-            </ul>
+            </ul> -->
           </li>
           <li><a href="./?view=sell"><i class='fa fa-usd'></i> <span>Vender</span></a></li>
           <li><a href="./?view=sells"><i class='fa fa-shopping-cart'></i> <span>Ventas</span></a></li>
@@ -311,7 +311,26 @@
 <?php endif;?>
 
 </div><!-- ./wrapper -->
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-dialog-center">
 
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title red" style="text-align: left;">Atención</h4>
+      </div>
+      <div class="modal-body">
+          <p id="error"></p>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+  </div>
+
+</div>
+</div>
 <!-- REQUIRED JS SCRIPTS -->
 <!-- AdminLTE App -->
 <script src="plugins/dist/js/app.min.js" type="text/javascript"></script>

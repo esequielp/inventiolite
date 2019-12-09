@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-md-12 col-sm-6 col-ms-6 col-xs-12">
-	<h2>Directorio de Clientes</h2>
+	<h2>Clientes</h2>
 	</div>
 </div>
 

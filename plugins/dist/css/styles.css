@@ -1,0 +1,198 @@
+/*PRELOADES INICIO*/
+.no-js #loader { display: none;  }
+.js #loader { display: block; position: absolute; left: 100px; top: 0; }
+/*.se-pre-con {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background: url(../img/loader-64x/Preloader_3.gif) center no-repeat #fff;
+}
+*/
+.profile-pic {
+  position: relative;
+  display: inline-block;
+}
+
+.profile-pic:hover .edit {
+  display: block;
+}
+
+.edit {
+  padding-top: 7px; 
+  padding-right: 7px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: none;
+}
+
+.edit a {
+  color: red;
+}
+
+.logo-image{
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-top: -6px;
+}
+
+img.logo-navbar {
+    width: 10rem !important;
+    height: 10rem !important;
+}
+
+ul.nav li.dropdown:hover ul.dropdown-menu { display: block; }
+
+/*.dropdown-menu{
+  background: #3c8dbc !important;
+  right: 0px !important;
+  }*/
+
+.col-sm-4cols{
+    position: relative;
+    min-height: 1px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+@media (min-width: 768px) {
+.col-sm-4cols {
+        width: 20%;
+        float: left;
+    }
+}
+
+.jumbotron{
+  background: #ffb6b6 !important;
+}
+
+.toggle-vis{
+  cursor: pointer;
+
+}
+
+.text_search {
+    width: 80%;
+    font-size: 10px;
+    font-family: verdana;
+    opacity: 1;
+    color :#ccc;
+}
+
+
+.modal-dialog {}
+.thumbnail {margin-bottom:6px;}
+
+.carousel-control.left,.carousel-control.right{
+  background-image:none;
+  margin-top:10%;
+  width:5%;
+}
+
+
+.sfixed {
+    position: fixed;
+    right: 0;
+    top: 123px;
+    margin: 0 25px 0 0;
+    z-index: 99999;
+}
+
+.btn-info {
+    color:#fff;
+    background-color:#3c8dbc !important;
+    border-color:    #46b8da;
+}
+
+.btn-info:hover {
+  color: #fff;
+  background-color:#31b0d5 !important;
+  border-color:    #269abc;
+}
+
+
+/* The customcheck */
+.customcheck {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 18px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.customcheck input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: white;
+    border-color: #666;
+    border-width: 2px:;
+    border-radius: 5px;
+}
+
+/* On mouse-over, add a grey background color */
+.customcheck:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.customcheck input:checked ~ .checkmark {
+    background-color: #02cf32;
+    border-radius: 5px;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.customcheck input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.customcheck .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.modal-dialog {
+  height: 100%;
+  width: 94%;
+  display: flex;
+  align-items: center;
+}
+
+.modal-content {
+  margin: 0 auto;
+}

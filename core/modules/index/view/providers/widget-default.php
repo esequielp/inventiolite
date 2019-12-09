@@ -11,7 +11,7 @@
   </ul>
 </div>
 </div>
-		<h1>Directorio de Proveedores</h1>
+		<h2>Proveedores</h2>
 <br>
 		<?php
 

@@ -21,12 +21,13 @@ if(count($_POST)>0){
   $product->category_id=$category_id;
   $product->inventary_min=$inventary_min;
   
- if($_POST["is_bsf"]=='on'){ 
-    $is_bsf=1;
-  }else{
-    $is_bsf=0;
-  }  
-  $product->is_bsf =$is_bsf;
+ //if($_POST["is_bsf"]=='on'){ 
+  //  $is_bsf=1;
+  //}else{
+    //$is_bsf=0;
+  //}  
+  $product->is_bsf =$_POST["precio_bs"];
+  
   $product->user_id = $_SESSION["user_id"];
 
 //VERIFICO SI HAY UPLOAD

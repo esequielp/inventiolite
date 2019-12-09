@@ -86,6 +86,37 @@ class DivisaData {
 		return $array;
 	}
 
+	// public function addCategoria($name){
+		
+		
+
+	// 	$sql = "insert into category (name,created_at) ";
+	// 	$sql .= "value (\"$name\",$this->created_at)";
+	
+	// 	return Executor::doit($sql);
+		
+	// }
+
+	// public function addSubCategoria($category_id,$name){
+		
+	// 	$sql = "insert into subcategory (name,category_id,created_at) ";
+	// 	$sql .= "value (\"$name\",$category_id,$this->created_at)";
+	// 	Executor::doit($sql);
+		
+	// }	
+
+
+	// public static function getAllCategorias(){
+	// 	$sql = "select * FROM category  ";
+	// 	$query = Executor::doit($sql);
+	// 	return Model::many($query[0],new ProductData());
+	// }
+
+	// public static function getAllSubCategorias($nombre){
+	// 	$sql = "select SUBCATEGORÍA FROM categorias where CATEGORÍA like '%$nombre%'";
+	// 	$query = Executor::doit($sql);
+	// 	return Model::many($query[0],new ProductData());
+	// }
 
 }
 

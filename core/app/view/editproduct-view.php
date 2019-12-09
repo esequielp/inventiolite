@@ -69,7 +69,7 @@ if($product!=null):
     <div class="form-group">
     <label for="inputEmail1" class="col-lg-3 control-label">Categoria</label>
     <div class="col-md-8">
-    <select name="category_id" class="form-control">
+    <select name="category_id" class="form-control select2">
     <option value="">-- NINGUNA --</option>
     <?php foreach($categories as $category):?>
       <option value="<?php echo $category->id;?>" <?php if($product->category_id!=null&& $product->category_id==$category->id){ echo "selected";}?>><?php echo $category->name;?></option>

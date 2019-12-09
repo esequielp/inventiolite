@@ -1,15 +1,15 @@
-<?php $user = CategoryData::getById($_GET["id"]);?>
+<?php $user = SubCategoryData::getById($_GET["id"]);?>
 <div class="row">
 	<div class="col-md-12">
-	<h3>Editar Categoría</h3>
+	<h3>Editar Subcategoría</h3>
 	<br>
-		<form class="form-horizontal" method="post" id="addproduct" action="index.php?view=updatecategory" role="form">
+		<form class="form-horizontal" method="post" id="addproduct" action="index.php?view=updatesubcategory" role="form">
 
 
   <div class="form-group">
-    <label for="inputEmail1" class="col-md-2 control-label">Categoría*</label>
+    <label for="inputEmail1" class="col-md-2 control-label">Subcategoría*</label>
     <div class="col-md-6">
-      <input type="text" name="name" required  value="<?php echo $user->name;?>" class="form-control" id="name" placeholder="Nombre">
+      <input type="text" name="name" required value="<?php echo $user->name;?>" class="form-control" id="name" placeholder="Nombre">
     </div>
   </div>
 

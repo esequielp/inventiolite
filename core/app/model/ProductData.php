@@ -22,25 +22,34 @@ class ProductData {
 
 	public function add(){
 		$pg = $this->percentage;
+		
+
+		$precioBS =	$this->is_bsf;
+		$precio_in =$this->price_in;
+
 		$divisas = DivisaData::getAll();
 		
 		//ultimo valor del dolar  
 		$ultimo_elemento=count($divisas)-1; 
 		$valor_dolar = ($divisas[$ultimo_elemento]->monto);
-		
+
+		//SI MARCA PRECIO ES BS DEBO CONVERTIR A DOLAR ;
+		if ($precioBS =='1') {
+			$precio_in =  ($precio_in / $valor_dolar );
+		}
 		//Precio costo en Bsf
-		$PrecioNeto = $this->price_in * $valor_dolar  ;
+		$PrecioNeto = $precio_in * $valor_dolar  ;
 		//Cantidad de Ganancia en Dolar
-		$PrecioGanciaDL = (($this->price_in * $pg) /100 );
+		$PrecioGanciaDL = (($precio_in * $pg) /100 );
 		//Cantidad Ganancia en Bs
-		$PrecioGanciaBs = ((($this->price_in * $pg) /100 ) * $valor_dolar ) ;
+		$PrecioGanciaBs = ((($precio_in * $pg) /100 ) * $valor_dolar ) ;
 		//Precio venta en dolar
-		$PrecioVentaDl = ((($this->price_in * $pg) /100 ) + $this->price_in )  ;	
+		$PrecioVentaDl = ((($precio_in * $pg) /100 ) + $precio_in )  ;	
 		//Precio Venta en Bolivares
 		$PrecioVentaBS = $PrecioNeto + $PrecioGanciaBs;
 
 		$sql = "insert into ".self::$tablename." (barcode,name,description,attribute,location,price_in,price_out,price_out_bs,gain_dl,gain_bs,percentage,user_id,presentation,unit,category_id,inventary_min,is_bsf,created_at) ";
-		$sql .= "value (\"$this->barcode\",\"$this->name\",\"$this->description\",\"$this->attribute\",\"$this->location\",\"$this->price_in\",\"$PrecioVentaDl\",\"$PrecioVentaBS\",\"$PrecioGanciaDL\",\"$PrecioGanciaBs\",\"$this->percentage\",$this->user_id,\"$this->presentation\",\"$this->unit\",$this->category_id,$this->inventary_min,\"$this->is_bsf\",NOW())";
+		$sql .= "value (\"$this->barcode\",\"$this->name\",\"$this->description\",\"$this->attribute\",\"$this->location\",\"$precio_in\",\"$PrecioVentaDl\",\"$PrecioVentaBS\",\"$PrecioGanciaDL\",\"$PrecioGanciaBs\",\"$this->percentage\",$this->user_id,\"$this->presentation\",\"$this->unit\",$this->category_id,$this->inventary_min,\"$this->is_bsf\",NOW())";
 		
 		//echo $sql;
 		//exit;
@@ -138,6 +147,11 @@ class ProductData {
 
 	public function del_category(){
 		$sql = "update ".self::$tablename." set category_id=NULL where id=$this->id";
+		Executor::doit($sql);
+	}
+
+	public function del_subcategory(){
+		$sql = "update ".self::$tablename." set subcategory_id=NULL where id=$this->id";
 		Executor::doit($sql);
 	}
 
@@ -248,6 +262,13 @@ class ProductData {
 		$query = Executor::doit($sql);
 		return Model::many($query[0],new ProductData());
 	}
+
+	public static function getAllBySubCategoryId($subcategory_id){
+		$sql = "select * from ".self::$tablename." where subcategory_id=$subcategory_id order by created_at desc";
+		$query = Executor::doit($sql);
+		return Model::many($query[0],new ProductData());
+	}
+
 
 
 	//test data INSERT

@@ -2,6 +2,7 @@
 /**
 * @author evilnapsis
 **/
+ini_set('display_errors', 0);
 
 define("ROOT", dirname(__FILE__));
 

@@ -50,18 +50,12 @@ if(count($_POST)>0){
             }
         }
       }
-echo $errorUploadType;
-exit;
+//echo $errorUploadType;
+//exit;
 
 foreach($_FILES['images']['name'] as $key=>$val){
             // File upload path
             $fileName = basename($_FILES['images']['name'][$key]);
-
-
-
- 
-
-
 
             $idproduct = 3;
             echo  $fileName ."<br>";

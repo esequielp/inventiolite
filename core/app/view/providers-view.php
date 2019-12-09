@@ -1,13 +1,13 @@
 <div class="row">
 	<div class="col-md-12 col-sm-6 col-ms-6 col-xs-12">
-	<h2>Directorio de Proveedores</h2>
+	<h2>Proveedores</h2>
 	</div>
 </div>
 
 <div class="row">
 	<div class="col-md-12 col-sm-6 col-ms-6 col-xs-12">
 		<div class="btn-group  pull-right">
-			<a href="index.php?view=newprovider" class="btn btn-info"> <i class='fa fa-plus'></i> Nuevo Proveedor</a>
+			<a href="index.php?view=newprovider" class="btn btn-info btn-md"> <i class='fa fa-plus'></i> Nuevo Proveedor</a>
 		</div>
 	</div>
 </div>

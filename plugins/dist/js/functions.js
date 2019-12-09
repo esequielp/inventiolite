@@ -42,7 +42,7 @@ $(document).on("click",".del_img", function () {
 
 //ELIMINAR IMAGEN VISTA EDITAR PRODUCTOS
 var txt;
-var r = confirm("Esta Seguro de eliminar esta Imagen?");
+var r = confirm("Está seguro de eliminar esta imagen?");
 if (r == true) {
  var id = $(this).attr('id');
  //alert(id);
@@ -72,7 +72,7 @@ var title = $(this).attr('title');
 
 //ELIMINAR IMAGEN VISTA EDITAR PRODUCTOS
 var txt;
-var r = confirm("Esta Seguro de eliminar esta " + title + " ?");
+var r = confirm("Está seguro de eliminar esta " + title + " ?");
 if (r == true) {
   return true;
 }else{
@@ -80,7 +80,6 @@ if (r == true) {
 }
  
 });
-
 
 //Clase Datatabkes
 var table = $('.datatable').DataTable( {
@@ -108,11 +107,11 @@ var table = $('.datatable').DataTable( {
           "sSortDescending": ": Activar para ordenar la columna de manera descendente"
       }
     },
-    "iDisplayLength": 5,
-    "aLengthMenu": [[5,
-    10, 50,100, -1], [5, 10, 50,100, "All"]],
+    "iDisplayLength": 10,
+    "aLengthMenu": [[10,
+    10, 50,100, -1], [10, 10, 50,100, "All"]],
    "dom": '<"top"Bf>rt<"bottom"lip><"clear">',
-   "order": [[ 0, "desc" ]],
+   "order": [[ 1, "asc" ]],
     buttons: [
         {
             extend:    'copyHtml5',
@@ -483,3 +482,123 @@ $(document).on("click",".clone", function () {
         alert( 'Clicked row id '+id );
         //onsole.log( type );
     } );
+
+
+///COMBO DEPENDIENTE CATEGORIA
+
+$(document).ready(function() {
+
+ $('#category_id').on('select2:select', function (e) {
+  e.preventDefault();
+      
+      var idcategoria = $(this).val();
+      var origin =  window.location.origin;
+      var pathname =  window.location.pathname;
+      var pathname = pathname.replace("index.php", "");
+      var currentUrl = origin+pathname;
+
+      if(idcategoria) {
+      $('#subcategory_id').empty();
+      var Url =  currentUrl+ 'core/app/view/ajax_get_subcategory-view.php?id='+idcategoria;               
+      $.ajax({
+      type: "GET",
+      url: Url,
+      dataType  : 'json',
+      success:function(data){
+                  //alert(data.success + '-' + data.message);
+                  var arraydata = data;
+               $("#subcategory_id").select2({width: '100%',data: arraydata});
+              }
+
+          });
+      }else{
+
+         $('#subcategory_id').empty();
+
+      }
+
+  });
+
+
+
+        //  $('input[type="checkbox"]').click(function(){
+
+        //     if($(this).prop("checked") == true){
+
+        //         alert("Checkbox is checked.");
+
+        //     }
+
+        //     else if($(this).prop("checked") == false){
+
+        //         alert("Checkbox is unchecked.");
+
+        //     }
+
+        // });
+
+// $( "#description" ).click(function() {
+//   var idsubcategoria = $('#subcategory_id').val();
+//       alert(idsubcategoria);
+
+//    });
+
+//  $( "#product_code" ).click(function() {
+//   alert(123);
+//     $("#subcategory_id").select2("open");
+// });
+
+//CARGAR COMBO REMOTO
+//  $("#subcategory_id").select2({
+ //    ajax: { 
+ //     url: Url,
+ //     type: "GET",
+ //     dataType: 'json',
+ //     delay: 250,
+ //     data: function (params) {
+ //      return {
+ //        searchTerm: params.term // search term
+ //      };
+ //     },
+ //     processResults: function (response) {
+ //       return {
+ //          results: response
+
+ //       };
+     
+ //     },
+ //     cache: true
+ //    }
+ //    });
+
+
+$('#price_in').focusout(function(){
+
+  var tasa = $('#tasa').val();
+  var precioin = $('#price_in').val();
+  var is_bsf = $('#is_bsf').val();
+
+    
+if($('#is_bsf').prop("checked") == true){
+
+      $('#precio_bs').val(1);
+
+    //if (is_bsf =='on') {
+
+      if(parseInt(tasa)>parseInt(precioin))
+
+      {
+
+        $("#error").html("Precio en Bs no puede ser menor que la tasa");
+        $('#myModal').modal("show");
+
+      }
+    }else{
+      $('#precio_bs').val('');
+
+    }
+
+});
+
+
+});
