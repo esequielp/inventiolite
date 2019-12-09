@@ -36,6 +36,7 @@ class ProductData {
 		//SI MARCA PRECIO ES BS DEBO CONVERTIR A DOLAR ;
 		if ($precioBS =='1') {
 			$precio_in =  ($precio_in / $valor_dolar );
+			$precioBS =0;
 		}
 		//Precio costo en Bsf
 		$PrecioNeto = $precio_in * $valor_dolar  ;
@@ -112,7 +113,9 @@ class ProductData {
 		//busco los precios de los productos
 		$products = ProductData::getAllActive();	
 
-		foreach($products as $product):
+		foreach($products as $product){
+
+
 
 		//porcentaje
 		$pg = $product->percentage;
@@ -133,13 +136,20 @@ class ProductData {
 
 		$finalPrice = ((($product->price_in * $pg) /100 ) + $product->price_in ) * $valor_dolar ;
 			//echo $finalPrice ."<br>";
+
+			//exit;
 		//actualizo el precio salida
 		
 
 		$sql = "update ".self::$tablename." set price_out=\"$PrecioVentaDl\",price_out_bs=\"$PrecioVentaBS\",gain_dl=\"$PrecioGanciaDL\",gain_bs=\"$PrecioGanciaBs\" where id=$product->id;";
 
+		//echo $sql;
+		//exit;
+
 		Executor::doit($sql);
-		endforeach;
+		
+		}
+
 		//echo $sql;
 		//exit;
 		

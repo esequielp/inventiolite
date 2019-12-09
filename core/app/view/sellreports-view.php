@@ -1,6 +1,12 @@
 <?php
+//ini_set("display_errors", 1);
 $clients = PersonData::getClients();
+$divisas = DivisaData::getLast();
+$valor_dolar = $divisas[0]->monto;
+$fecha = $divisas[0]->created_at;
 ?>
+
+
 <section class="content">
 <div class="row">
 	<div class="col-md-12">
@@ -8,6 +14,17 @@ $clients = PersonData::getClients();
 
 						<form>
 						<input type="hidden" name="view" value="sellreports">
+
+<div class="row">
+	<div class="text-right">
+<button type="buttom" class="btn btn-success">
+	Tasa:  <?php echo number_format($valor_dolar,2,'.',','); ?><br>
+	Fecha :</b> <?php echo date( 'd/m/Y', strtotime($fecha)); ?>
+
+</button>
+	</div>
+</div>
+<div class="clearfix"><br></div>
 <div class="row">
 <div class="col-md-3">
 

@@ -5,10 +5,13 @@ $valor_dolar = $divisas[0]->monto;
 $fecha = $divisas[0]->created_at;
 ?>
 <div class="row">
-<div class="col-md-12 col-sm-6 col-ms-6 col-xs-12">
-	<h5 class="text-right"><b>Precio del Dolar : </b><?php echo number_format($valor_dolar,2,'.',','); ?></h5>
-	<h5 class="text-right"><b>Fecha : </b><?php echo  date( 'd/m/Y', strtotime($fecha)); ?></h5>
-</div>
+	<div class="text-right">
+<button type="buttom" class="btn btn-success">
+	Tasa:  <?php echo number_format($valor_dolar,2,'.',','); ?><br>
+	Fecha :</b> <?php echo date( 'd/m/Y', strtotime($fecha)); ?>
+
+</button>
+	</div>
 </div>
 <div class="row">
 	<div class="col-md-12">

@@ -600,5 +600,12 @@ if($('#is_bsf').prop("checked") == true){
 
 });
 
+$( "#newdivisa" ).click(function() {
+
+        $("#error").html("Procediendo a actualizar el precio de todos los productos Activos, <br>Este proceso puede tardar, por favor espere que finalize. ");
+        $('#myModal').modal("show");
+        $(this).attr('disabled','disabled');
+
+});
 
 });

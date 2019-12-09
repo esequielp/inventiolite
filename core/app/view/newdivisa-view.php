@@ -21,7 +21,7 @@
 
   <div class="form-group">
     <div class="col-md-offset-2 col-md-10">
-      <button type="submit" class="btn btn-primary">Agregar</button>
+      <button type="submit" class="btn btn-primary" id="newdivisa">Agregar</button>
       <a href="javascript:history.back(-1);" class="btn btn-danger">Cancelar</a>
     </div>
   </div>
