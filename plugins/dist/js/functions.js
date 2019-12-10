@@ -488,10 +488,11 @@ $(document).on("click",".clone", function () {
 
 $(document).ready(function() {
 
- $('#category_id').on('select2:select', function (e) {
+ $('.category_ajax').on('select2:select', function (e) {
   e.preventDefault();
       
       var idcategoria = $(this).val();
+      alert(idcategoria);
       var origin =  window.location.origin;
       var pathname =  window.location.pathname;
       var pathname = pathname.replace("index.php", "");

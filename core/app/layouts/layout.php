@@ -226,6 +226,7 @@
               <li><a href="./?view=categories">Categorias</a></li>
               <li><a href="./?view=clients">Clientes</a></li>
               <li><a href="./?view=providers">Proveedores</a></li>
+              <li><a href="./?view=almacenes">Almacenes</a></li>
             </ul>
           </li>
           <li class="treeview">

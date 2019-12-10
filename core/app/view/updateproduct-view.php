@@ -18,12 +18,11 @@ if(count($_POST)>0){
 	$product->inventary_min = $_POST["inventary_min"];
 	$product->inventary_min = $_POST["images_id"];
 	$product->location = $_POST["location"];
-	
-	
-	$category_id="NULL";
-  
-	if($_POST["category_id"]!=""){ $category_id=$_POST["category_id"];}
+	$product->category_id=$_POST["category_id"];
+	$product->subcategory_id=$_POST["subcategory_id"];
+	$product->almacen_id=$_POST["almacen_id"];
 
+	
 	//SI TIENE IMAGENES PARA ELIMINAR ELIMINO
 	if($_POST["images_id"]!=""){ 
 	

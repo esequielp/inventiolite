@@ -17,6 +17,9 @@ if(count($_POST)>0){
   if($_POST["inventary_min"]!=""){ $inventary_min=$_POST["inventary_min"];}
 
   $product->category_id=$category_id;
+  $product->subcategory_id=$_POST["subcategory_id"];
+  $product->almacen_id=$_POST["almacen_id"];
+
   $product->inventary_min=$inventary_min;
   $product->is_bsf = $_POST["is_bsf"];
   $product->user_id = $_SESSION["user_id"];

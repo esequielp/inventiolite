@@ -1,6 +1,7 @@
-    <?php 
+<?php 
 $categories = CategoryData::getAll();
-    ?>
+$almacenes = AlmacenData::getAll();
+?>
 <?php
 ini_set("display_errors", 0);
 
@@ -19,7 +20,7 @@ $fecha = $divisas[0]->created_at;
       Fecha :</b> <?php echo date( 'd/m/Y', strtotime($fecha)); ?>
 
     </button>
-<input type="text" id="tasa" value="<?php echo $valor_dolar; ?>">
+<input type="hidden" id="tasa" value="<?php echo $valor_dolar; ?>">
     </div>
 </div>
 
@@ -50,7 +51,7 @@ $fecha = $divisas[0]->created_at;
   <div class="form-group">
     <label for="inputEmail1" class="col-md-2 control-label">Categoría*</label>
     <div class="col-md-6">
-      <select name="category_id" id="category_id" class="form-control select2" required>
+      <select name="category_id" id="category_id" class="form-control select2 category_ajax" required>
       <option value="">-- NINGUNA --</option>
       <?php foreach($categories as $category):?>
         <option value="<?php echo $category->id;?>"><?php echo $category->name;?></option>
@@ -78,13 +79,23 @@ $fecha = $divisas[0]->created_at;
       <textarea name="attribute" class="form-control" id="attribute" placeholder="Marca-Modelo-Etc (Separar con - )"></textarea>
     </div>
   </div>
-  <div class="form-group">
+<!--   <div class="form-group">
     <label for="inputEmail1" class="col-md-2 control-label">Ubicación</label>
     <div class="col-md-6">
       <textarea name="location" class="form-control" id="location" placeholder="Ubicacion en Almacen (Separar con - )"></textarea>
     </div>
-  </div>
-
+  </div> -->
+  <div class="form-group">
+    <label for="inputEmail1" class="col-md-2 control-label">Almacen*</label>
+    <div class="col-md-6">
+      <select name="almacen_id" id="almacen_id" class="form-control select2 almacen_ajax" required>
+      <option value="">-- NINGUNA --</option>
+      <?php foreach($almacenes as $almacen):?>
+        <option value="<?php echo $almacen->id;?>"><?php echo $almacen->name;?></option>
+      <?php endforeach;?>
+        </select>    
+    </div>
+  </div> 
 <div class="form-group">
     <label for="inputEmail1" class="col-md-2 control-label" >Precio en Bs.</label>
     <div class="col-md-6">
@@ -93,7 +104,7 @@ $fecha = $divisas[0]->created_at;
           <input type="checkbox" name="is_bsf" id="is_bsf">
           <span class="checkmark"></span>
         </label>
-        <input type="text" name="precio_bs" id="precio_bs">
+        <input type="hidden" name="precio_bs" id="precio_bs">
     </div>
     </div>
 </div>
